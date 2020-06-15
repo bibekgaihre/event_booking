@@ -1,5 +1,5 @@
 const EventModel = require("./event.model");
-const { JsonToCSV } = require("../../utils/textParser");
+const { convertJSONToCSV } = require("../../utils/json2csv");
 
 class Controller {
   constructor() {}
@@ -33,19 +33,23 @@ class Controller {
     return data;
   }
 
-  async download(id) {
+  async generateCSV(id) {
     try {
-      const fields = ["Date", "Location", "Comment", "Max Booking"];
-
-      let { date, location, comment, max_booking } = await EventModel.findOne({
+      let data = await EventModel.findOne({
         _id: id,
-      });
-
-      let data = { date, location, comment, max_booking };
+      }).populate("booking");
+      let { booking, date, location, comment } = data;
+      data = await convertJSONToCSV(
+        JSON.stringify(booking),
+        date,
+        location,
+        comment
+      );
+      console.log(data);
+      return data;
     } catch (e) {
       console.log(e);
     }
   }
 }
-
 module.exports = new Controller();

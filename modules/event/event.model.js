@@ -37,10 +37,12 @@ const EventSchema = mongoose.Schema(
     max_booking: {
       type: Number,
     },
-    booking: {
-      type: mongoose.Schema.ObjectId,
-      ref: "Booking",
-    },
+    booking: [
+      {
+        type: mongoose.Schema.ObjectId,
+        ref: "Booking",
+      },
+    ],
   },
   {
     collection: "event",

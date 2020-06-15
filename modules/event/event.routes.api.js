@@ -2,19 +2,18 @@ const router = require("express").Router();
 const Controller = require("./event.controller.js");
 
 router.get("/", async (req, res, next) => {
-  //filter query params
+  //to do filter query params
   let data = await Controller.list();
   res.json(data);
 });
 
 router.get("/download/:id", async (req, res, next) => {
-  let filename = "export.csv";
-  let data = await Controller.download(req.params.id);
-  // res.setHeader("Content-Type", "text/csv");
-  // res.setHeader("Content-Disposition", "attachment; filename=" + filename);
-  // res.csv(data, true);
-  // res.download(data);
-  res.json(data);
+  let data = await Controller.generateCSV(req.params.id);
+  data = Buffer.from(data);
+  // res.send(data);
+  res.setHeader("Content-disposition", "attachment; filename=testing.csv");
+  res.set("Content-Type", "text/csv");
+  res.status(200).send(data);
 });
 
 router.get("/:id", async (req, res, next) => {
