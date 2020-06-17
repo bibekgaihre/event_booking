@@ -20,6 +20,9 @@ const EventSchema = mongoose.Schema(
     sponsor_logo: {
       type: String,
     },
+    event_detail: {
+      type: String,
+    },
     meal_option: {
       type: [
         {

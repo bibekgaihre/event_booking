@@ -12,7 +12,8 @@ const checkEmail = () => {
       ];
       if (invalidEmails.some((v) => work_email.includes(v))) {
         return res.json({
-          message: "Personal Email not allowed. Only work email are allowed",
+          message:
+            "You cannot use your personal email to book a meal. Please register with your work email",
         });
       }
       next();

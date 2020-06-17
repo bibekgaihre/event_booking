@@ -16,7 +16,8 @@ class Controller {
     });
     if (emailfound.length === 1) {
       return Promise.resolve({
-        message: "Email not allowed. Already exist for event",
+        message:
+          "The email address entered has already been used to book a meal. You can only book one meal. Thank You.",
       });
     }
     if (emailfound.length === 0) {
