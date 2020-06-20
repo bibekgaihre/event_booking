@@ -29,7 +29,8 @@ class Controller {
 
         let query = { time: event.date.getTime(), location: event.location };
         await BookingModel.create(payload);
-        await mailer.sendVerificationEmail(payload, query);
+        // let mailesent = await mailer.sendVerificationEmail(payload, query);
+        // if (!mailesent) throw new Error("Error Sending Mail");
         return Promise.resolve({ message: "Verification email sent." });
       }
     }

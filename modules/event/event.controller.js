@@ -19,8 +19,11 @@ class Controller {
 
   //edit event but cannot be edited on event date (eventData !== Date.now())
   async updateById(id, payload) {
-    if (payload.date === Date.now()) return null;
-    let data = await EventModel.findOneAndUpdate({ _id: id }, payload);
+    let event = await this.getById(id);
+    return new Date(event.date).setHours(0, 0, 0, 0) >=
+      new Date().setHours(0, 0, 0, 0)
+      ? await EventModel.updateOne({ _id: id }, payload)
+      : null;
   }
 
   //delete event
