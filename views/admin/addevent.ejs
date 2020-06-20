@@ -1,433 +1,323 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Add Event</title>
 
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!--===============================================================================================-->
-    <link rel="icon" type="image/png" href="/images/icons/favicon.ico" />
-    <!--===============================================================================================-->
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="/vendor/bootstrap/css/bootstrap.min.css"
-    />
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" console.log("hello");
+<head>
+  <title>Add Event</title>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!--===============================================================================================-->
+  <!-- <link rel="icon" type="image/png" href="/images/icons/favicon.ico" /> -->
+  <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="/vendor/bootstrap/css/bootstrap.min.css" />
+  <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" console.log("hello");
     href="/fonts/font-awesome-4.7.0/css/font-awesome.min.css" />
-    <!--===============================================================================================-->
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="/fonts/iconic/css/material-design-iconic-font.min.css"
-    />
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="/vendor/animate/animate.css" />
-    <!--===============================================================================================-->
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="/vendor/css-hamburgers/hamburgers.min.css"
-    />
-    <!--===============================================================================================-->
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="/vendor/animsition/css/animsition.min.css"
-    />
-    <!--===============================================================================================-->
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="/vendor/select2/select2.min.css"
-    />
-    <!--===============================================================================================-->
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="/vendor/daterangepicker/daterangepicker.css"
-    />
-    <!--===============================================================================================-->
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="/vendor/noui/nouislider.min.css"
-    />
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="/css/util.css" />
-    <link rel="stylesheet" type="text/css" href="/css/main.css" />
-    <style>
-      table {
-        width: 100%;
-        padding-right: 10px;
-      }
-      .sidebar-container {
-        position: absolute;
-        width: 260px;
-        height: 100%;
-        left: 0;
-        overflow-x: hidden;
-        overflow-y: auto;
-        background: #1a1a1a;
-        color: #fff;
-      }
-      .content-container {
-        padding-top: 20px;
-      }
-      .sidebar-logo {
-        padding: 0 auto;
-        background: #1a1a1a;
-        height: auto;
-      }
-      .sidebar-navigation {
-        padding: 0;
-        margin: 0;
-        list-style-type: none;
-        position: relative;
-      }
-      .sidebar-navigation li {
-        background-color: transparent;
-        position: relative;
-        display: inline-block;
-        width: 100%;
-        line-height: 20px;
-      }
-      .sidebar-navigation li a {
-        padding: 10px 15px 10px 30px;
-        display: block;
-        color: #fff;
-      }
-      .sidebar-navigation li .fa {
-        margin-right: 10px;
-      }
-      .sidebar-navigation li a:active,
-      .sidebar-navigation li a:hover,
-      .sidebar-navigation li a:focus {
-        text-decoration: none;
-        outline: none;
-      }
-      .sidebar-navigation li::before {
-        background-color: #2574a9;
-        position: absolute;
-        content: "";
-        height: 100%;
-        left: 0;
-        top: 0;
-        -webkit-transition: width 0.2s ease-in;
-        transition: width 0.2s ease-in;
-        width: 3px;
-        z-index: -1;
-      }
-      .sidebar-navigation li:hover::before {
-        width: 100%;
-      }
-      .sidebar-navigation .header {
-        font-size: 12px;
-        text-transform: uppercase;
-        background-color: #151515;
-        padding: 10px 15px 10px 30px;
-      }
-      h6 {
-        font-size: 18px;
-        line-height: 25px;
-      }
-      .sidebar-navigation .header::before {
-        background-color: transparent;
-      }
-      .content-container {
-        padding-left: 220px;
-      }
-    </style>
-    <!--===============================================================================================-->
-  </head>
+  <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="/fonts/iconic/css/material-design-iconic-font.min.css" />
+  <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="/vendor/animate/animate.css" />
+  <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="/vendor/css-hamburgers/hamburgers.min.css" />
+  <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="/vendor/animsition/css/animsition.min.css" />
+  <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="/vendor/select2/select2.min.css" />
+  <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="/vendor/daterangepicker/daterangepicker.css" />
+  <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="/vendor/noui/nouislider.min.css" />
+  <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="/css/util.css" />
+  <link rel="stylesheet" type="text/css" href="/css/main.css" />
+  <style>
+    table {
+      width: 100%;
+      padding-right: 10px;
+    }
 
-  <body>
-    <div class="pos-f-t" style="background-color: #1a1a1a;">
-      <!-- <div class="collapse" id="navbarToggleExternalContent">
+    .sidebar-container {
+      position: absolute;
+      width: 260px;
+      height: 100%;
+      left: 0;
+      overflow-x: hidden;
+      overflow-y: auto;
+      background: #1a1a1a;
+      color: #fff;
+    }
+
+    .content-container {
+      padding-top: 20px;
+    }
+
+    .sidebar-logo {
+      padding: 0 auto;
+      background: #1a1a1a;
+      height: auto;
+    }
+
+    .sidebar-navigation {
+      padding: 0;
+      margin: 0;
+      list-style-type: none;
+      position: relative;
+    }
+
+    .sidebar-navigation li {
+      background-color: transparent;
+      position: relative;
+      display: inline-block;
+      width: 100%;
+      line-height: 20px;
+    }
+
+    .sidebar-navigation li a {
+      padding: 10px 15px 10px 30px;
+      display: block;
+      color: #fff;
+    }
+
+    .sidebar-navigation li .fa {
+      margin-right: 10px;
+    }
+
+    .sidebar-navigation li a:active,
+    .sidebar-navigation li a:hover,
+    .sidebar-navigation li a:focus {
+      text-decoration: none;
+      outline: none;
+    }
+
+    .sidebar-navigation li::before {
+      background-color: #2574a9;
+      position: absolute;
+      content: "";
+      height: 100%;
+      left: 0;
+      top: 0;
+      -webkit-transition: width 0.2s ease-in;
+      transition: width 0.2s ease-in;
+      width: 3px;
+      z-index: -1;
+    }
+
+    .sidebar-navigation li:hover::before {
+      width: 100%;
+    }
+
+    .sidebar-navigation .header {
+      font-size: 12px;
+      text-transform: uppercase;
+      background-color: #151515;
+      padding: 10px 15px 10px 30px;
+    }
+
+    h6 {
+      font-size: 18px;
+      line-height: 25px;
+    }
+
+    .sidebar-navigation .header::before {
+      background-color: transparent;
+    }
+
+    .content-container {
+      padding-left: 220px;
+    }
+  </style>
+  <!--===============================================================================================-->
+</head>
+
+<body>
+  <div class="pos-f-t" style="background-color: #1a1a1a;">
+    <!-- <div class="collapse" id="navbarToggleExternalContent">
               
           </div> -->
-      <nav class="navbar navbar-dark">
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarToggleExternalContent"
-          aria-controls="navbarToggleExternalContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div>
-          <h4 class="text-white">
-            Pulze
-            <small
-              class="text-white"
-              style="font-family: cursive; font-size: 15px;"
-              >Giveaway</small
-            >
-          </h4>
+    <nav class="navbar navbar-dark">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent"
+        aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div>
+        <h4 class="text-white">
+          Pulze
+          <small class="text-white" style="font-family: cursive; font-size: 15px;">Giveaway</small>
+        </h4>
+      </div>
+    </nav>
+  </div>
+  <div class="sidebar-container">
+    <div class="sidebar-logo text-center">
+      <br /><br />
+      <!-- <img src="/images/icons/LOGO.png" width="100%" height="auto" /> -->
+    </div>
+    <br />
+    <%- include('../layouts/sidebar') -%>
+  </div>
+  <div class="container-contact100">
+    <div class="wrap-contact100">
+      <form class="contact100-form validate-form" id="frmEvent">
+        <span class="contact100-form-title">
+          Add Event
+        </span>
+        <div class="wrap-input100 bg1">
+          <span class="label-input100">Date ( DD / MM / YYYY ) *</span><br />
+          <input type="text" class="input100" id="datetime12" data-format="DD-MM-YYYY h:mm a" name="date"
+            data-template="DD / MM / YYYY" name="datetime" value="21-12-2019" />
         </div>
-      </nav>
-    </div>
-    <div class="sidebar-container">
-      <div class="sidebar-logo text-center">
-        <br /><br />
-        <!-- <img src="/images/icons/LOGO.png" width="100%" height="auto" /> -->
-      </div>
-      <br />
-      <%- include('../layouts/sidebar') -%>
-    </div>
-    <div class="container-contact100">
-      <div class="wrap-contact100">
-        <form class="contact100-form validate-form">
-          <span class="contact100-form-title">
-            Add Event
-          </span>
-          <div class="wrap-input100 bg1">
-            <span class="label-input100">Date ( DD / MM / YYYY ) *</span><br />
-            <input
-              type="text"
-              class="input100"
-              id="datetime12"
-              data-format="DD-MM-YYYY h:mm a"
-              name="date"
-              data-template="DD / MM / YYYY"
-              name="datetime"
-              value="21-12-2019"
-            />
-          </div>
-          <div
-            class="wrap-input100 validate-input bg1"
-            data-validate="Please Type the comment"
-          >
-            <span class="label-input100">Comment *</span>
-            <input
-              class="input100"
-              type="text"
-              name="comment"
-              placeholder="Enter Comment"
-            />
-          </div>
-          <div
-            class="wrap-input100 validate-input bg1"
-            data-validate="Please Type the Sponsor Name"
-          >
-            <span class="label-input100">Sponsor Name *</span>
-            <input
-              class="input100"
-              type="text"
-              name="sponsor_name"
-              placeholder="Enter Sponsor name"
-            />
-          </div>
-          <div
-            class="wrap-input100 validate-input bg1"
-            data-validate="Please Type the Sponsor address"
-          >
-            <span class="label-input100">Sponsor Address *</span>
-            <input
-              class="input100"
-              type="text"
-              name="sponsor_address"
-              placeholder="Enter sponsor_address"
-            />
-          </div>
-          <div class="wrap-input100 validate-input bg1" data-validate="">
-            <span class="label-input100">Sponsor Logo (Optional)</span>
-            <input
-              class="input100"
-              type="file"
-              name="sponsor_logo"
-              placeholder="Upload Sponsor Logo"
-            />
-          </div>
-          <div
-            class="wrap-input100 validate-input bg1"
-            data-validate="Please Type the Detail of Event"
-          >
-            <span class="label-input100">Event Detail *</span>
-            <textarea
-              class="input100"
-              type="textarea"
-              name="event_detail"
-              placeholder="Enter event details"
-            /></textarea>
-          </div>
-          <br />
-          <!-- Here  -->
-          <table>
-            <tr>
-              <td>
-                <div
-                  class="wrap-input100 validate-input bg1"
-                  data-validate="Please Type the Meal Name"
-                >
-                  <span class="label-input100">Meal option 1: Name *</span>
-                  <input
-                    class="input100"
-                    type="text"
-                    name="meal_name_1"
-                    placeholder="Enter meal name"
-                  />
-                </div>
-              </td>
-              <td>
-                <div
-                  class="wrap-input100 validate-input bg1"
-                  data-validate="Please Insert the Meal Image"
-                >
-                  <span class="label-input100"> *</span>
-                  <input
-                    class="input100"
-                    type="file"
-                    name="meal_image_1"
-                    placeholder="upload meal image"
-                  />
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <div
-                  class="wrap-input100 validate-input bg1"
-                  data-validate="Please Type the Meal Name"
-                >
-                  <span class="label-input100">Meal option 2: Name </span>
-                  <input
-                    class="input100"
-                    type="text"
-                    name="meal_name_2"
-                    placeholder="Enter meal name"
-                  />
-                </div>
-              </td>
-              <td>
-                <div class="wrap-input100 validate-input bg1" data-validate="">
-                  <span class="label-input100"> *</span>
-                  <input
-                    class="input100"
-                    type="file"
-                    name="meal_image_2"
-                    placeholder="upload meal image"
-                  />
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <div class="wrap-input100 validate-input bg1" data-validate="">
-                  <span class="label-input100">Meal option 3: Name </span>
-                  <input
-                    class="input100"
-                    type="text"
-                    name="meal_name_3"
-                    placeholder="Enter meal name"
-                  />
-                </div>
-              </td>
-              <td>
-                <div
-                  class="wrap-input100 validate-input bg1"
-                  data-validate="Please Insert the Meal Image"
-                >
-                  <span class="label-input100"> *</span>
-                  <input
-                    class="input100"
-                    type="file"
-                    name="meal_image_3"
-                    placeholder="upload meal image"
-                  />
-                </div>
-              </td>
-            </tr>
-          </table>
+        <div class="wrap-input100 validate-input bg1" data-validate="Please Type the Location">
+          <span class="label-input100">Location *</span>
+          <input class="input100" type="text" name="location" placeholder="Enter Location" />
+        </div>
+        <div class="wrap-input100 validate-input bg1" data-validate="Please enter max booking">
+          <span class="label-input100">Max Booking *</span>
+          <input class="input100" type="number" name="max_booking" placeholder="Enter Max Booking" />
+        </div>
+        <div class="wrap-input100 validate-input bg1" data-validate="Please Type the comment">
+          <span class="label-input100">Comment *</span>
+          <input class="input100" type="text" name="comment" placeholder="Enter Comment" />
+        </div>
+        <div class="wrap-input100 validate-input bg1" data-validate="Please Type the Sponsor Name">
+          <span class="label-input100">Sponsor Name *</span>
+          <input class="input100" type="text" name="sponsor_name" placeholder="Enter Sponsor name" />
+        </div>
+        <div class="wrap-input100 validate-input bg1" data-validate="Please Type the Sponsor address">
+          <span class="label-input100">Sponsor Address *</span>
+          <input class="input100" type="text" name="sponsor_address" placeholder="Enter sponsor_address" />
+        </div>
+        <div class="wrap-input100 validate-input bg1" data-validate="">
+          <span class="label-input100">Sponsor Logo (Optional)</span>
+          <input class="input100" type="file" name="sponsor_logo" placeholder="Upload Sponsor Logo" />
+        </div>
+        <div class="wrap-input100 validate-input bg1" data-validate="Please Type the Detail of Event">
+          <span class="label-input100">Event Detail *</span>
+          <textarea class="input100" type="textarea" name="event_detail" placeholder="Enter event details" /></textarea>
+        </div>
+        <br />
+        <!-- Here  -->
+        <table>
+          <tr>
+            <td>
+              <div class="wrap-input100 validate-input bg1" data-validate="Please Type the Meal Name">
+                <span class="label-input100">Meal option 1: Name *</span>
+                <input class="input100" type="text" name="meal_name_1" placeholder="Enter meal name" />
+              </div>
+            </td>
+            <td>
+              <div class="wrap-input100 validate-input bg1" data-validate="Please Insert the Meal Image">
+                <span class="label-input100"> *</span>
+                <input class="input100" type="file" name="meal_image_1" placeholder="upload meal image" />
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="wrap-input100 validate-input bg1" data-validate="Please Type the Meal Name">
+                <span class="label-input100">Meal option 2: Name </span>
+                <input class="input100" type="text" name="meal_name_2" placeholder="Enter meal name" />
+              </div>
+            </td>
+            <td>
+              <div class="wrap-input100 validate-input bg1" data-validate="">
+                <span class="label-input100"> *</span>
+                <input class="input100" type="file" name="meal_image_2" placeholder="upload meal image" />
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="wrap-input100 validate-input bg1" data-validate="">
+                <span class="label-input100">Meal option 3: Name </span>
+                <input class="input100" type="text" name="meal_name_3" placeholder="Enter meal name" />
+              </div>
+            </td>
+            <td>
+              <div class="wrap-input100 validate-input bg1" data-validate="Please Insert the Meal Image">
+                <span class="label-input100"> *</span>
+                <input class="input100" type="file" name="meal_image_3" placeholder="upload meal image" />
+              </div>
+            </td>
+          </tr>
+        </table>
 
-          <div class="container-contact100-form-btn">
-            <button class="btn contact100-form-btn" type="button">
-              <span>
-                Add Event
-                <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
-              </span>
-            </button>
-          </div>
-        </form>
-      </div>
+        <div class="container-contact100-form-btn">
+          <button class="btn contact100-form-btn" type="button">
+            <span>
+              Add Event
+              <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+            </span>
+          </button>
+        </div>
+      </form>
     </div>
+  </div>
 
-    <!--===============================================================================================-->
-    <script src="/vendor/jquery/jquery-3.2.1.min.js"></script>
-    <!--===============================================================================================-->
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <!-- <script src="js/jquery.js"></script> -->
-    <script src="/js/moment.min.js"></script>
-    <script src="/js/combodate.js"></script>
-    <!--===============================================================================================-->
-    <script src="/vendor/animsition/js/animsition.min.js"></script>
-    <!--===============================================================================================-->
-    <script src="/vendor/bootstrap/js/popper.js"></script>
-    <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
-    <script src="/js/index.js"></script>
-    <!--===============================================================================================-->
-    <script src="/vendor/select2/select2.min.js"></script>
-    <script>
-      function dobParser(dob) {
-        return {
-          year: dob.split(" ")[0].split("-")[2],
-          month: dob.split(" ")[0].split("-")[1],
-          day: dob.split(" ")[0].split("-")[0],
-          hour: dob.split(" ")[1].split(":")[0],
-          min: dob.split(" ")[1].split(":")[1],
-        };
-      }
-      $(".btn").click(function () {
-        // let shift = dob.split(" ")[2]; //to do am or pm string conversion
-        let data = {
-          name: $("input[name=name]").val(),
-          gender: $("select[name=gender]").val(),
-          pob: {
-            place: $("input[name=pob]").val(),
+  <!--===============================================================================================-->
+  <script src="/vendor/jquery/jquery-3.2.1.min.js"></script>
+  <!--===============================================================================================-->
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <!-- <script src="js/jquery.js"></script> -->
+  <script src="/js/moment.min.js"></script>
+  <script src="/js/combodate.js"></script>
+  <!--===============================================================================================-->
+  <script src="/vendor/animsition/js/animsition.min.js"></script>
+  <!--===============================================================================================-->
+  <script src="/vendor/bootstrap/js/popper.js"></script>
+  <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+  <script src="/js/index.js"></script>
+  <!--===============================================================================================-->
+  <script src="/vendor/select2/select2.min.js"></script>
+  <script>
+    $(".btn").click(function () {
+      let data = {
+        date: $("input[name=date]").val(),
+        comment: $('input[name=comment]').val(),
+        location: $('input[name=location]').val(),
+        max_booking: $('input[name=max_booking]').val(),
+        sponsor_name: $('input[name=comment]').val(),
+        sponsor_address: $('input[name=sponsor_address]').val(),
+        event_detail: $('textarea[name=event_detail]').val(),
+        meal_option: [
+          {
+            text: $('input[name=meal_name_1]').val(),
           },
-          currentLocation: {
-            place: $("input[name=currentLocation]").val(),
+          {
+            text: $('input[name=meal_name_2]').val(),
           },
-          phone: $("input[name=phone]").val(),
-          gothra: $("input[name=gothra]").val(),
-          dob: dobParser($("input[name=dob]").val()),
-          fbmsn_id: fbmsn_id,
-        };
-        $.ajax({
-          url: "/api/v1/user",
-          type: "POST",
-          data,
-        })
-          .then((d) => {
-            MessengerExtensions.requestCloseBrowser();
-          })
-          .fail((e) => {
-            //console.log(e.responseJSON.message);
-          });
+          {
+            text: $('input[name=meal_name_3]').val(),
+          }
+        ],
+      };
+      $.ajax({
+        url: "/api/v1/event",
+        type: "POST",
+        data,
+      }).then(d => {
+        document.getElementById("frmEvent").reset();
       });
-      $("#datetime12").combodate({
-        minYear: 1975,
-        maxYear: new Date().getFullYear(),
-        minuteStep: 1,
+    });
+    $("#datetime12").combodate({
+      minYear: 1975,
+      maxYear: new Date().getFullYear(),
+      minuteStep: 1,
+    });
+    $(".js-select2").each(function () {
+      $(this).select2({
+        minimumResultsForSearch: 20,
+        dropdownParent: $(this).next(".dropDownSelect2"),
       });
-      $(".js-select2").each(function () {
-        $(this).select2({
-          minimumResultsForSearch: 20,
-          dropdownParent: $(this).next(".dropDownSelect2"),
-        });
-      });
-    </script>
-    <!--===============================================================================================-->
-    <script src="/vendor/daterangepicker/moment.min.js"></script>
-    <script src="/vendor/daterangepicker/daterangepicker.js"></script>
-    <!--===============================================================================================-->
-    <script src="/vendor/countdowntime/countdowntime.js"></script>
-    <!--===============================================================================================-->
-    <!--===============================================================================================-->
-    <script src="/js/main.js"></script>
-  </body>
+    });
+  </script>
+  <!--===============================================================================================-->
+  <script src="/vendor/daterangepicker/moment.min.js"></script>
+  <script src="/vendor/daterangepicker/daterangepicker.js"></script>
+  <!--===============================================================================================-->
+  <script src="/vendor/countdowntime/countdowntime.js"></script>
+  <!--===============================================================================================-->
+  <!--===============================================================================================-->
+  <script src="/js/main.js"></script>
+</body>
+
 </html>

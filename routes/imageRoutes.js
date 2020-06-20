@@ -39,7 +39,7 @@ router.post("/upload", upload.single("myFile"), async (req, res, next) => {
           });
       }
     });
-    /**saving to db as image bugger!! */
+    /**saving to db as image buffer!! */
     // var img = {
     //   data: Buffer.from(encode_image, "base64"),
     //   contentType: req.file.mimetype,
