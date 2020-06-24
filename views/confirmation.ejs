@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0  shrink-to-fit=no"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/main.css" />
+    <title>Pulze</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-light bg-light">
+      <a class="navbar-brand" href="#">
+        <img
+          src="/docs/4.0/assets/brand/bootstrap-solid.svg"
+          width="30"
+          height="30"
+          alt=""
+        />
+      </a>
+    </nav>
+    <div class="container-fluid lay">
+      <main id="content" class="bd-masthead" role="main">
+        <div class="container confirmcon">
+          <div class="row">
+            <div class="col-md-12 order-md-1 text-center pr-md-5">
+              <div class="confirmelem" style="margin-top: 4%;">
+                <h3>
+                  <b>
+                    Thank you ${Name} Your booking has been placed!
+                  </b>
+                </h3>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 order-md-1 text-center pr-md-5">
+              <div
+                class="confirmelem"
+                style="color: #1a9cf3; padding-left: 10%; padding-right: 10%;"
+              >
+                <h3>
+                  <b>
+                    Please check your work email and click the link to verify
+                    your email address and confirm your booking.
+                  </b>
+                </h3>
+              </div>
+            </div>
+          </div>
+          <br />
+          <div class="row">
+            <div class="col-md-12 order-md-1 text-center pr-md-5">
+              <div class="confirmelem2">
+                <h4>
+                  Please note, your free meal will be delivered on
+                  <b>${date}</b> at <b>12 noon</b>. Please be ready to pickup
+                  your meal from the front entrance.
+                </h4>
+              </div>
+            </div>
+          </div>
+
+          <br /><br />
+          <div class="row">
+            <div class="col-md-12 order-md-1 text-center pr-md-5">
+              <div
+                class="confirmelem"
+                style="padding-left: 19%; padding-right: 19%;"
+              >
+                <h4>
+                  <b>Why not take this opportunity to download Pulze?</b><br />
+                  Pulze is completely free to use and will let you connect to
+                  your fellow colleagues and alumni in the medical community,
+                  safely and anonymously.
+                </h4>
+              </div>
+            </div>
+          </div>
+          <br />
+
+          <div class="row" style="padding-left: 6%; padding-right: 6%;">
+            <div class="col-md-5 order-md-1 pr-md-12 col-sm-12">col-sm-8</div>
+            <div class="col-md-7 order-md-1 pr-md-12 col-sm-12">
+              <div class="row">
+                <img
+                  src="/images/icons/appstore_256x256.png"
+                  width="auto"
+                  height="auto"
+                />
+              </div>
+              <div class="row">
+                <img
+                  src="/images/icons/playstore_256x256.png"
+                  width="auto"
+                  height="auto"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+    <br />
+    <br />
+    <%- include('layouts/footer') -%>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

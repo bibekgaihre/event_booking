@@ -1,0 +1,196 @@
+@import url("//db.onlinewebfonts.com/c/cfdc7772d1426068d6cc35816bdb06f8?family=Visby+CF+Bold");
+@import url("//db.onlinewebfonts.com/c/b308b655c4a8ecda903f3dae55345490?family=Visby+Round+CF+Light");
+@import url("//db.onlinewebfonts.com/c/79927a8d010a79419f5c30e4d87409d5?family=Visby+CF+Medium");
+body {
+  /* font-family: "Visby Round CF Light"; */
+}
+/* .lay {
+} */
+.headingtext {
+  position: absolute;
+  top: 86%;
+  left: 49%;
+  margin: auto;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  text-align: center;
+  font-family: "Visby CF Bold";
+  color: white;
+}
+
+.firstp {
+  /* text-align: center; */
+  padding-top: 2%;
+  display: flex;
+  font-size: x-large;
+  font-family: "Visby CF Medium";
+  padding-left: 6%;
+  padding-right: 6%;
+}
+
+.registerhead {
+  padding-top: 2%;
+  font-family: "Visby CF Medium";
+
+  font-size: x-large;
+}
+
+.boldbox1 {
+  font-family: "Arial, Helvetica, sans-serif";
+
+  margin: 0 auto;
+  border-color: #1a9cf3;
+  width: 60%;
+  border-style: solid;
+  border-width: 5px;
+  padding: 14px;
+  position: relative;
+}
+.eventbox {
+  /* font-family: "Visby CF Bold"; */
+  margin: 0 auto;
+  border-color: #1a9cf3;
+  width: 90%;
+  border-style: solid;
+  border-width: 2px;
+  padding: 14px;
+  position: relative;
+}
+.form {
+  font-family: "Arial, Helvetica, sans-serif";
+  margin: 0 auto;
+  /* border-color: #1a9cf3; */
+  width: 90%;
+  /* border-style: solid; */
+  /* border-width: 2px; */
+  padding: 14px;
+  padding-top: 3%;
+  position: relative;
+}
+.form-control {
+  border-radius: 0px;
+}
+.confirmelem {
+  margin: 0 auto;
+  /* font-family: "sans-serif";
+   */
+  font-family: "Visby CF Medium";
+
+  padding: 14px;
+}
+.valid-feedback {
+  display: block;
+  width: 100%;
+  margin-top: -0.75rem;
+  font-size: 93%;
+  color: #1c9cf3;
+  margin-left: 1%;
+}
+
+.confirmelem2 {
+  font-family: "Visby CF Medium";
+
+  margin: 0 auto;
+  padding-left: 20%;
+  padding-right: 19%;
+}
+
+.btnall {
+  color: #fff;
+  background-color: #1a9cf3;
+  border-color: #1a9cf3;
+}
+
+.confirmcon {
+  border-width: 2px;
+  border-style: solid;
+  border-color: #1a9cf3;
+}
+.footer {
+  position: relative;
+  left: 0;
+  font-family: "Visby CF Medium";
+  bottom: 0;
+  width: 100%;
+  padding: 5px;
+  background-color: #1a9cf3;
+  color: white;
+  text-align: center;
+}
+
+.button1 {
+  font-family: "Visby CF Medium";
+}
+.maingrid {
+  max-width: 100%;
+  margin: 30px auto;
+  padding: 0 50px;
+  width: 100%;
+  display: grid;
+  /* Define Auto Row size */
+  grid-auto-rows: 360px;
+  /*Define our columns */
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 1em;
+}
+
+.cards {
+  border-radius: 0px;
+  padding: 4px;
+  color: #fff;
+  background-color: #c9deec;
+}
+.location {
+  padding-top: 10%;
+  display: flex;
+  font-size: x-large;
+  padding-left: 6%;
+  padding-right: 6%;
+}
+.evendate {
+  margin-top: 50%;
+  font-size: 10px;
+}
+
+.innercard {
+  background-color: dimgrey;
+  height: 100%;
+  font-family: "Visby CF Medium";
+}
+.innercard1 {
+  height: 57%;
+  background-color: #1a9cf3;
+}
+.innercard2 {
+  height: 43%;
+  background-color: white;
+  color: black;
+}
+.transcard {
+  background-color: #69696936;
+  height: 100%;
+  font-family: "Visby CF Medium";
+  display: flex;
+  font-size: 60px;
+  padding-top: 25%;
+}
+.comment {
+  font-size: 15px;
+}
+.sponsorname {
+  font-size: 14px;
+}
+.sponsoraddress {
+  font-size: 12px;
+}
+
+.subhead {
+  padding-left: 3%;
+  padding-top: 1%;
+}
+
+@media screen and (max-width: 600px) {
+  div.firstp {
+    padding-right: 1%;
+  }
+}

@@ -16,7 +16,7 @@ const GeneralSchema = mongoose.Schema(
     },
   },
   {
-    collection: "admin",
+    collection: "general",
     timeStamps: {
       createdAt: "created_at",
       updatedAt: "updated_at",

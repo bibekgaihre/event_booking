@@ -14,8 +14,11 @@
       href="/vendor/bootstrap/css/bootstrap.min.css"
     />
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" console.log("hello");
-    href="/fonts/font-awesome-4.7.0/css/font-awesome.min.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/fonts/font-awesome-4.7.0/css/font-awesome.min.css"
+    />
     <!--===============================================================================================-->
     <link
       rel="stylesheet"
@@ -262,53 +265,22 @@
     <!--===============================================================================================-->
     <script src="/vendor/select2/select2.min.js"></script>
     <script>
-      function dobParser(dob) {
-        return {
-          year: dob.split(" ")[0].split("-")[2],
-          month: dob.split(" ")[0].split("-")[1],
-          day: dob.split(" ")[0].split("-")[0],
-          hour: dob.split(" ")[1].split(":")[0],
-          min: dob.split(" ")[1].split(":")[1],
-        };
-      }
       $(".btn").click(function () {
         // let shift = dob.split(" ")[2]; //to do am or pm string conversion
         let data = {
-          name: $("input[name=name]").val(),
-          gender: $("select[name=gender]").val(),
-          pob: {
-            place: $("input[name=pob]").val(),
-          },
-          currentLocation: {
-            place: $("input[name=currentLocation]").val(),
-          },
-          phone: $("input[name=phone]").val(),
-          gothra: $("input[name=gothra]").val(),
-          dob: dobParser($("input[name=dob]").val()),
-          fbmsn_id: fbmsn_id,
+          image: $("input[name=image]").val(),
         };
         $.ajax({
-          url: "/api/v1/user",
+          url: "/api/v1/general/changeimage",
           type: "POST",
           data,
         })
           .then((d) => {
-            MessengerExtensions.requestCloseBrowser();
+            console.log(d);
           })
           .fail((e) => {
             //console.log(e.responseJSON.message);
           });
-      });
-      $("#datetime12").combodate({
-        minYear: 1975,
-        maxYear: new Date().getFullYear(),
-        minuteStep: 1,
-      });
-      $(".js-select2").each(function () {
-        $(this).select2({
-          minimumResultsForSearch: 20,
-          dropdownParent: $(this).next(".dropDownSelect2"),
-        });
       });
     </script>
     <!--===============================================================================================-->

@@ -3,8 +3,17 @@ const Controller = require("./event.controller.js");
 
 router.get("/", async (req, res, next) => {
   //to do filter query params
-  let data = await Controller.list();
-  res.json(data);
+  console.log("hello");
+  let limit = parseInt(req.query.limit) || 27;
+  let start = parseInt(req.query.start) || 0;
+  let page = parseInt(start) / parseInt(limit) + 1;
+  let data = await Controller.list({ limit, start, page });
+  console.log(data);
+  try {
+    res.json(data);
+  } catch (e) {
+    console.log(e);
+  }
 });
 
 router.get("/download/:id", async (req, res, next) => {

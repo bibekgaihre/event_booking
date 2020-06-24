@@ -174,7 +174,7 @@
       </div>
     </div>
 
-    <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+    <script src="/vendor/jquery/jquery-3.2.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
     <script>
@@ -190,7 +190,7 @@
             "<'row'<'col-sm-12'tr>>" +
             "<'row'<'col-sm-4'i><'col-sm-8'<'float-right p-2'p>>>",
           ajax: {
-            url: "/api/v1/user",
+            url: "/api/v1/event/",
             // beforeSend: function (request) {
             //     request.setRequestHeader("access_token", $.cookie("access_token"));
             // },
@@ -209,16 +209,31 @@
           },
           columns: [
             {
-              data: "name",
+              data: null,
+              class: "text-center",
+              render: (d, type, row, meta) => {
+                return new Date(d.date).toLocaleDateString();
+              },
             },
             {
-              data: "birth_moon_sign",
+              data: "location",
             },
             {
-              data: "birth_moon_nakshatra",
+              data: "sponsor_name",
             },
             {
-              data: "gothra",
+              data: null,
+              class: "text-center",
+              render: (d, type, row, meta) => {
+                return `<button type="button" class="btn btn-light" title="Download" onclick="window.location.replace('/api/v1/event/download/${d._id}')"> Download</button>`;
+              },
+            },
+            {
+              data: null,
+              class: "text-center",
+              render: (d, type, row, meta) => {
+                return `<button type="button" class="btn btn-dark" title="Detail" onclick="window.location.replace('/event/update/${d._id}')"><i class="fa fa-edit"></i> Detail</button>`;
+              },
             },
           ],
         });
@@ -226,56 +241,3 @@
     </script>
   </body>
 </html>
-
-<div
-  class="modal fade"
-  id="mdlSentiment"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog" role="document">
-    <div class="container-contact100">
-      <form class="frmConfig validate-form">
-        <span class="contact100-form-title">
-          Update Details
-        </span>
-        <!-- <input type='text' id="u_id" /> -->
-        <div
-          class="wrap-input100 validate-input bg1"
-          data-validate="Please Type Year"
-        >
-          <span class="label-input100">YEAR*</span>
-          <input
-            class="input100"
-            type="text"
-            name="year"
-            placeholder="Enter Year"
-          />
-        </div>
-        <div
-          class="wrap-input100 validate-input bg1"
-          data-validate="Please Type Month"
-        >
-          <span class="label-input100">MONTH*</span>
-          <input
-            class="input100"
-            type="text"
-            name="month"
-            placeholder="Enter Month"
-          />
-        </div>
-
-        <div class="container-contact100-form-btn">
-          <button class="contact100-form-btn">
-            <span>
-              Submit
-              <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
-            </span>
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>

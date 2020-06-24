@@ -12,4 +12,7 @@ router.get("/event/list", function (req, res, next) {
 router.get("/content/update", function (req, res, next) {
   res.render("admin/editcms");
 });
+router.get("/event/update", function (req, res, next) {
+  res.render("admin/editevent");
+});
 module.exports = router;

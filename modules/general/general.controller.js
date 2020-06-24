@@ -1,7 +1,16 @@
 const GeneralModel = require("./general.model");
 
 class Controller {
-  async updateImage(file) {}
+  async updateImage(payload) {
+    console.log(payload);
+    let data = await GeneralModel.findOneAndUpdate(
+      {},
+      { image: payload },
+      { new: true, upsert: true }
+    );
+    console.log(data);
+    return data;
+  }
 
   async updateText(text) {
     let data = await GeneralModel.replaceOne(

@@ -4,8 +4,19 @@ const { convertJSONToCSV } = require("../../utils/json2csv");
 class Controller {
   constructor() {}
   //list event
-  list() {
-    return EventModel.find({});
+  async list({ limit, start, page }) {
+    let total = await EventModel.countDocuments();
+    let data = await EventModel.find()
+      .skip(start)
+      .limit(limit)
+      .sort({ created_at: -1 });
+    return {
+      total,
+      limit,
+      start,
+      page,
+      data,
+    };
   }
 
   // add event

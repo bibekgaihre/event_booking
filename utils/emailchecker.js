@@ -9,6 +9,7 @@ const checkEmail = () => {
         "@outlook.com",
         "@icloud.com",
         "@aol.com",
+        "@gmail.com",
       ];
       if (invalidEmails.some((v) => work_email.includes(v))) {
         return res.json({
