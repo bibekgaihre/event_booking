@@ -157,7 +157,7 @@
   </div>
   <div class="container-contact100">
     <div class="wrap-contact100">
-      <form class="contact100-form validate-form" id="frmEvent">
+      <form method="POST" action="/api/v1/event" class="contact100-form validate-form" id="frmEvent"  enctype="multipart/form-data">
         <span class="contact100-form-title">
           Add Event
         </span>
@@ -186,7 +186,7 @@
           <span class="label-input100">Sponsor Address *</span>
           <input class="input100" type="text" name="sponsor_address" placeholder="Enter sponsor_address" />
         </div>
-        <div class="wrap-input100 validate-input bg1" data-validate="">
+        <div class="wrap-input100 bg1" data-validate="">
           <span class="label-input100">Sponsor Logo (Optional)</span>
           <input class="input100" type="file" name="sponsor_logo" placeholder="Upload Sponsor Logo" />
         </div>
@@ -199,13 +199,13 @@
         <table>
           <tr>
             <td>
-              <div class="wrap-input100 validate-input bg1" data-validate="Please Type the Meal Name">
+              <div class="wrap-input100 bg1" data-validate="Please Type the Meal Name">
                 <span class="label-input100">Meal option 1: Name *</span>
                 <input class="input100" type="text" name="meal_name_1" placeholder="Enter meal name" />
               </div>
             </td>
             <td>
-              <div class="wrap-input100 validate-input bg1" data-validate="Please Insert the Meal Image">
+              <div class="wrap-input100 bg1" data-validate="Please Insert the Meal Image">
                 <span class="label-input100"> *</span>
                 <input class="input100" type="file" name="meal_image_1" placeholder="upload meal image" />
               </div>
@@ -213,13 +213,13 @@
           </tr>
           <tr>
             <td>
-              <div class="wrap-input100 validate-input bg1" data-validate="Please Type the Meal Name">
+              <div class="wrap-input100 bg1" data-validate="Please Type the Meal Name">
                 <span class="label-input100">Meal option 2: Name </span>
                 <input class="input100" type="text" name="meal_name_2" placeholder="Enter meal name" />
               </div>
             </td>
             <td>
-              <div class="wrap-input100 validate-input bg1" data-validate="">
+              <div class="wrap-input100 bg1" data-validate="">
                 <span class="label-input100"> *</span>
                 <input class="input100" type="file" name="meal_image_2" placeholder="upload meal image" />
               </div>
@@ -227,13 +227,13 @@
           </tr>
           <tr>
             <td>
-              <div class="wrap-input100 validate-input bg1" data-validate="">
+              <div class="wrap-input100  bg1" data-validate="">
                 <span class="label-input100">Meal option 3: Name </span>
                 <input class="input100" type="text" name="meal_name_3" placeholder="Enter meal name" />
               </div>
             </td>
             <td>
-              <div class="wrap-input100 validate-input bg1" data-validate="Please Insert the Meal Image">
+              <div class="wrap-input100  bg1" data-validate="Please Insert the Meal Image">
                 <span class="label-input100"> *</span>
                 <input class="input100" type="file" name="meal_image_3" placeholder="upload meal image" />
               </div>
@@ -242,7 +242,7 @@
         </table>
 
         <div class="container-contact100-form-btn">
-          <button class="btn contact100-form-btn" type="button">
+          <button class="btn contact100-form-btn" type="submit">
             <span>
               Add Event
               <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
@@ -269,35 +269,35 @@
   <!--===============================================================================================-->
   <script src="/vendor/select2/select2.min.js"></script>
   <script>
-    $(".btn").click(function () {
-      let data = {
-        date: $("input[name=date]").val(),
-        comment: $('input[name=comment]').val(),
-        location: $('input[name=location]').val(),
-        max_booking: $('input[name=max_booking]').val(),
-        sponsor_name: $('input[name=comment]').val(),
-        sponsor_address: $('input[name=sponsor_address]').val(),
-        event_detail: $('textarea[name=event_detail]').val(),
-        meal_option: [
-          {
-            text: $('input[name=meal_name_1]').val(),
-          },
-          {
-            text: $('input[name=meal_name_2]').val(),
-          },
-          {
-            text: $('input[name=meal_name_3]').val(),
-          }
-        ],
-      };
-      $.ajax({
-        url: "/api/v1/event",
-        type: "POST",
-        data,
-      }).then(d => {
-        document.getElementById("frmEvent").reset();
-      });
-    });
+    // $(".btn").click(function () {
+    //   let data = {
+    //     date: $("input[name=date]").val(),
+    //     comment: $('input[name=comment]').val(),
+    //     location: $('input[name=location]').val(),
+    //     max_booking: $('input[name=max_booking]').val(),
+    //     sponsor_name: $('input[name=comment]').val(),
+    //     sponsor_address: $('input[name=sponsor_address]').val(),
+    //     event_detail: $('textarea[name=event_detail]').val(),
+    //     meal_option: [
+    //       {
+    //         text: $('input[name=meal_name_1]').val(),
+    //       },
+    //       {
+    //         text: $('input[name=meal_name_2]').val(),
+    //       },
+    //       {
+    //         text: $('input[name=meal_name_3]').val(),
+    //       }
+    //     ],
+    //   };
+    //   $.ajax({
+    //     url: "/api/v1/event",
+    //     type: "POST",
+    //     data,
+    //   }).then(d => {
+    //     document.getElementById("frmEvent").reset();
+    //   });
+    // });
     $("#datetime12").combodate({
       minYear: 1975,
       maxYear: new Date().getFullYear(),

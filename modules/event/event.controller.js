@@ -9,7 +9,29 @@ class Controller {
   }
 
   // add event
-  save(payload) {
+  save(payload, files) {
+    payload.meal_option = [
+      { text: payload.meal_name_1 },
+      { text: payload.meal_name_2 },
+      { text: payload.meal_name_3 },
+    ];
+
+    if (files) {
+      files.forEach((file) => {
+        if (file.fieldname === "sponsor_logo") {
+          payload.sponsor_logo = file.destination + "/" + file.filename;
+        }
+        if (file.fieldname === "meal_image_1") {
+          payload.meal_option[0].image = file.destination + "/" + file.filename;
+        }
+        if (file.fieldname === "meal_image_2") {
+          payload.meal_option[1].image = file.destination + "/" + file.filename;
+        }
+        if (file.fieldname === "meal_image_3") {
+          payload.meal_option[2].image = file.destination + "/" + file.filename;
+        }
+      });
+    }
     return EventModel.findOneAndUpdate(
       { date: payload.date, location: payload.location },
       payload,
@@ -18,7 +40,29 @@ class Controller {
   }
 
   //edit event but cannot be edited on event date (eventData !== Date.now())
-  async updateById(id, payload) {
+  async updateById(id, payload, files) {
+    payload.meal_option = [
+      { text: payload.meal_name_1 },
+      { text: payload.meal_name_2 },
+      { text: payload.meal_name_3 },
+    ];
+
+    if (files) {
+      files.forEach((file) => {
+        if (file.fieldname === "sponsor_logo") {
+          payload.sponsor_logo = file.destination + "/" + file.filename;
+        }
+        if (file.fieldname === "meal_image_1") {
+          payload.meal_option[0].image = file.destination + "/" + file.filename;
+        }
+        if (file.fieldname === "meal_image_2") {
+          payload.meal_option[1].image = file.destination + "/" + file.filename;
+        }
+        if (file.fieldname === "meal_image_3") {
+          payload.meal_option[2].image = file.destination + "/" + file.filename;
+        }
+      });
+    }
     let event = await this.getById(id);
     return new Date(event.date).setHours(0, 0, 0, 0) !==
       new Date().setHours(0, 0, 0, 0)

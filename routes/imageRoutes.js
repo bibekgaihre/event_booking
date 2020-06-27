@@ -8,14 +8,14 @@ const { ConnectionBase } = require("mongoose");
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "public/images/eventImage");
+    cb(null, "public/images/events");
   },
   filename: function (req, file, cb) {
     cb(null, file.fieldname + ".jpg");
   },
 });
-var upload = multer({ storage: storage });
 
+var upload = multer({ storage: storage }).any();
 // router.get("/", async (req, res, next) => {
 //   GeneralModel.findOne({}, (err, response) => {
 //     let data = Buffer.from(response.img.data.buffer);
@@ -24,11 +24,12 @@ var upload = multer({ storage: storage });
 //   });
 // });
 
-router.post("/upload", upload.single("myFile"), async (req, res, next) => {
+router.post("/upload", upload, async (req, res, next) => {
   try {
+    let directory = path.join(__dirname + "/../public/images/eventImage");
+    req.files.forEach((file) => {});
     let newFile = req.file.path.replace(/^.*[\\\/]/, "");
     // var encode_image = fs.readFileSync(req.file.path).toString("base64");
-    let directory = path.join(__dirname + "/../public/images/eventImage");
     fs.readdir(directory, (err, files) => {
       if (err) throw err;
 
@@ -49,10 +50,9 @@ router.post("/upload", upload.single("myFile"), async (req, res, next) => {
     // else await GeneralModel.updateOne({ _id: image._id }, { img });
     res.send(req.file);
   } catch (e) {
-    console.log(e);
     const error = new Error("Error Uploading the Image");
     error.httpStatusCode = 400;
-    return next(error);
+    next(e);
   }
 });
 
