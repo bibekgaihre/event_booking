@@ -67,11 +67,28 @@ class Controller {
   //edit event but cannot be edited on event date (eventData !== Date.now())
 
   async updateById(id, payload, files) {
-    payload.meal_option = [
-      { text: payload.meal_name_1 },
-      { text: payload.meal_name_2 },
-      { text: payload.meal_name_3 },
-    ];
+    payload.meal_option = [];
+    if (payload.meal_name_1)
+      payload.meal_option.push({
+        text: payload.meal_name_1,
+        image: payload.meal_1,
+      });
+    if (payload.meal_name_2)
+      payload.meal_option.push({
+        text: payload.meal_name_2,
+        image: payload.meal_2,
+      });
+    if (payload.meal_name_3)
+      payload.meal_option.push({
+        text: payload.meal_name_3,
+        image: payload.meal_3,
+      });
+
+    // payload.meal_option = [
+    //   { text: payload.meal_name_1 || "N/A", image: payload.meal_1 },
+    //   { text: payload.meal_name_2 || "N/A", image: payload.meal_2 },
+    //   { text: payload.meal_name_3 || "N/A", image: payload.meal_3 },
+    // ];
 
     if (files) {
       files.forEach((file) => {
@@ -112,6 +129,14 @@ class Controller {
         _id: id,
       }).populate("booking");
       let { booking, date, location, comment } = data;
+      booking = booking.map((elem) => {
+        return {
+          work_email: elem.work_email,
+          full_name: elem.full_name,
+          phone: elem.phone,
+          selected_meal: elem.selected_meal,
+        };
+      });
       data = await convertJSONToCSV(
         JSON.stringify(booking),
         date,

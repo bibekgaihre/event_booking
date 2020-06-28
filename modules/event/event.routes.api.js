@@ -40,7 +40,7 @@ router.get("/getlatestevent", async (req, res, next) => {
     console.log(error);
   }
 });
-router.get("/download/:id", SecureAPI(), async (req, res, next) => {
+router.get("/download/:id", async (req, res, next) => {
   let data = await Controller.generateCSV(req.params.id);
   data = Buffer.from(data);
   // res.send(data);
@@ -58,9 +58,9 @@ router.post("/", upload, async (req, res, next) => {
   res.redirect("/admin/event/list");
 });
 
-router.patch("/:id", upload, async (req, res, next) => {
+router.post("/:id", upload, async (req, res, next) => {
   let data = await Controller.updateById(req.params.id, req.body, req.files);
-  res.json(data);
+  res.redirect("/admin/event/list");
 });
 
 router.delete("/:id", SecureAPI(), async (req, res, next) => {

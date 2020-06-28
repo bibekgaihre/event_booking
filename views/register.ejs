@@ -308,7 +308,6 @@
           method: "GET",
           url: "/api/v1/event/" + eventid,
         }).done((d) => {
-          console.log(d);
           $("#location").text(d.location);
           $("#date").text(moment(new Date(d.date)).format("LL"));
           $("#event_detail").text(d.event_detail);
@@ -330,7 +329,7 @@
                             />` +
                 (val.image
                   ? `  <img
-                              src="${val.image}"
+                              src="/${val.image}"
                               width="70px"
                               height="auto"
                             />`
