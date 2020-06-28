@@ -100,7 +100,66 @@
     url: "/api/v1/event",
   }).done((events) => {
     events.forEach((event) => {
-      $("#events").append(``);
+      let {
+        location,
+        _id,
+        comment,
+        sponsor_logo,
+        sponsor_name,
+        sponsor_address,
+      } = event;
+      let parsedDate = new Date(event.date).toUTCString();
+      let date =
+        parsedDate.split(" ")[1] +
+        " " +
+        parsedDate.split(" ")[2] +
+        " " +
+        parsedDate.split(" ")[3];
+      $("#events").append(`
+        <div class="card col-md-3" style="width: 300px; height: auto;">
+      <ul class="list-group list-group-flush">
+        <li
+          class="list-group-item text-center"
+          style="
+            background-color: #1089ff;
+            color: white;
+            height: 200px;
+            padding: 60px;
+          "
+        >
+          <p>${location}</p>
+          <u>${date}</u>
+        </li>
+        <li class="list-group-item" style="height: 150px;">
+          <p class="text-center text-muted h5" style="line-height: 0.1rem;">
+            ${comment}
+          </p>
+          <b>Sponsored by:</b>
+          <div class="row">
+            <div class="col-md-4">
+              <img
+                src="https://picsum.photos/seed/picsum/200/300"
+                width="70px"
+                height="70px"
+              />
+            </div>
+            <div class="col-md-8" style="line-height: 1.8rem;">
+              <b><u>${sponsor_name}</u></b
+              ><br />
+              <span>${sponsor_address}</span><br />
+              <br />
+              <a
+                href="/api/v1/event/download/${_id}"
+                class="btn btn-sm pull-right"
+                style="background-color: #1089ff; color: white;"
+                >Book Now</a
+              >
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+      `);
     });
   });
 </script>

@@ -32,6 +32,7 @@
             <div class="col-md-12 order-md-1 text-center pr-md-5">
               <img
                 src="https://cdn.pixabay.com/photo/2015/07/12/14/26/coffee-842020_960_720.jpg"
+                class="img-fluid"
               />
               <div class="headingtext">
                 <h1>
@@ -239,25 +240,7 @@
               </div>
             </div>
           </div>
-          <div class="row" style="padding-left: 6%; padding-right: 6%;">
-            <div class="col-md-5 order-md-1 pr-md-12 col-sm-12">col-sm-8</div>
-            <div class="col-md-7 order-md-1 pr-md-12 col-sm-12">
-              <div class="row">
-                <img
-                  src="/images/icons/appstore_256x256.png"
-                  width="auto"
-                  height="auto"
-                />
-              </div>
-              <div class="row">
-                <img
-                  src="/images/icons/playstore_256x256.png"
-                  width="auto"
-                  height="auto"
-                />
-              </div>
-            </div>
-          </div>
+          <%- include('layouts/store') -%>
         </div>
       </main>
     </div>
@@ -284,6 +267,7 @@
       crossorigin="anonymous"
     ></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.js"></script>
 
     <script>
       $("#contactModal").on("show.bs.modal", function (event) {});
@@ -292,9 +276,133 @@
 
         $.ajax({
           method: "GET",
-          url: "/api/v1/event",
+          url: "/api/v1/event/getlatestevent",
         }).done((d) => {
-          console.log(d);
+          $.each(d, function (i, val) {
+            if (val.result === 1) {
+              $(".maingrid").append(
+                ` <div class="cards">
+                  <div class="transcard text-center">
+                  Fully Booked
+                  <div class="innercard">
+                  <div class="innercard1 text-center">
+                    <div class="location"><b>${val.location}</b></div>
+                    <div class="eventdate">
+                      <b><u>${moment(new Date(val.date)).format("LL")}</u></b>
+                    </div>
+                  </div>
+                  <div class="innercard2">
+                    <div class="comment text-center">
+                      ${val.comment}
+                    </div>
+                    <div class="subhead"><b>Sponsored by:</b></div>
+                    <div class="row" style="padding-left: 5%;">
+                      <div class="col-md-4 col-lg-4 col-sm-3">
+                        ` +
+                  (val.sponsor_logo
+                    ? `<img
+                          src="${val.sponsor_logo}"
+                          width="70px"
+                          height="auto"
+                        />`
+                    : `<div></div>`) +
+                  `
+                      </div>
+                      <div class="col-md-8 col-lg-8 col-sm-8">
+                        <div class="sponsorname">
+                          <b
+                            ><u>
+                              ${val.sponsor_name}
+                            </u>
+                          </b>
+                        </div>
+                        <div class="sponsoraddress">
+                          ${val.sponsor_address}
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-11 col-lg-11">
+                        <a href="/event/${val._id}">
+                        <button
+                          type="button"
+                          class="btn btn-primary btn-sm btnall"
+                          style="float: right;"
+                          hidden
+                        >
+                          <b>Book Now</b>
+                        </button>
+                        </a>
+                      </div>
+                      <!-- <div class="col-md-5 col-lg-5"></div> -->
+                    </div>
+                  </div>
+                </div>
+            
+                
+              </div>`
+              );
+            }
+            if (val.result === 0) {
+              $(".maingrid").append(
+                ` <div class="cards">
+                <div class="innercard">
+                  <div class="innercard1 text-center">
+                    <div class="location"><b>${val.location}</b></div>
+                    <div class="eventdate">
+                      <b><u>${moment(new Date(val.date)).format("LL")}</u></b>
+                    </div>
+                  </div>
+                  <div class="innercard2">
+                    <div class="comment text-center">
+                      ${val.comment}
+                    </div>
+                    <div class="subhead"><b>Sponsored by:</b></div>
+                    <div class="row" style="padding-left: 5%;">
+                      <div class="col-md-4 col-lg-4 col-sm-3">
+                        ` +
+                  (val.sponsor_logo
+                    ? `<img
+                          src="${val.sponsor_logo}"
+                          width="70px"
+                          height="auto"
+                        />`
+                    : `<div></div>`) +
+                  `
+                      </div>
+                      <div class="col-md-8 col-lg-8 col-sm-8">
+                        <div class="sponsorname">
+                          <b
+                            ><u>
+                              ${val.sponsor_name}
+                            </u>
+                          </b>
+                        </div>
+                        <div class="sponsoraddress">
+                          ${val.sponsor_address}
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-11 col-lg-11">
+                        <a href="/event/${val._id}">
+                        <button
+                          type="button"
+                          class="btn btn-primary btn-sm btnall"
+                          style="float: right;"
+                        >
+                          <b>Book Now</b>
+                        </button>
+                        </a>
+                      </div>
+                      <!-- <div class="col-md-5 col-lg-5"></div> -->
+                    </div>
+                  </div>
+                </div>
+              </div>`
+              );
+            }
+          });
         });
 
         $("#frmsponsor").click(function () {

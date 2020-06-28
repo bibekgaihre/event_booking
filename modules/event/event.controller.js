@@ -19,19 +19,32 @@ class Controller {
     };
   }
 
-  // add event
   save(payload) {
-    return EventModel.findOneAndUpdate(
-      { date: payload.date, location: payload.location },
-      payload,
-      { new: true, upsert: true }
-    );
+    console.log(payload);
+    return;
+    let { sponsor_logo } = payload;
+    return EventModel.create(payload);
   }
+  async getlatestevent() {
+    //only list event which are coming near , o past events maximum 6 events
+    let data = await EventModel.find({ date: { $gte: new Date() } })
+      .limit(6)
+      .sort({ date: +1 });
 
+    data.forEach((d, i) => {
+      if (d.booking.length === d.max_booking) {
+        d.result = 1;
+      } else if (d.booking.length < d.max_booking) {
+        d.result = 0;
+      }
+    });
+    return data;
+  }
   //edit event but cannot be edited on event date (eventData !== Date.now())
   async updateById(id, payload) {
     if (payload.date === Date.now()) return null;
     let data = await EventModel.findOneAndUpdate({ _id: id }, payload);
+    return data;
   }
 
   //delete event
@@ -56,7 +69,7 @@ class Controller {
         location,
         comment
       );
-      console.log(data);
+
       return data;
     } catch (e) {
       console.log(e);

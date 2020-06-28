@@ -194,7 +194,7 @@
               data-format="DD-MM-YYYY h:mm a"
               name="date"
               data-template="DD / MM / YYYY"
-              name="datetime"
+            
               value="21-12-2019"
             />
           </div>
@@ -239,6 +239,7 @@
             <input
               class="input100"
               type="file"
+              id="sponsor_logo"
               name="sponsor_logo"
               placeholder="Upload Sponsor Logo"
             />
@@ -252,6 +253,7 @@
               class="input100"
               type="textarea"
               name="event_detail"
+              id="event_detail"
               placeholder="Enter event details"
             /></textarea>
           </div>
@@ -372,42 +374,69 @@
     <!--===============================================================================================-->
     <script src="/vendor/select2/select2.min.js"></script>
     <script>
-      function dobParser(dob) {
-        return {
-          year: dob.split(" ")[0].split("-")[2],
-          month: dob.split(" ")[0].split("-")[1],
-          day: dob.split(" ")[0].split("-")[0],
-          hour: dob.split(" ")[1].split(":")[0],
-          min: dob.split(" ")[1].split(":")[1],
-        };
-      }
-      $(".btn").click(function () {
-        // let shift = dob.split(" ")[2]; //to do am or pm string conversion
-        let data = {
-          name: $("input[name=name]").val(),
-          gender: $("select[name=gender]").val(),
-          pob: {
-            place: $("input[name=pob]").val(),
-          },
-          currentLocation: {
-            place: $("input[name=currentLocation]").val(),
-          },
-          phone: $("input[name=phone]").val(),
-          gothra: $("input[name=gothra]").val(),
-          dob: dobParser($("input[name=dob]").val()),
-          fbmsn_id: fbmsn_id,
-        };
+      let data;
+      // const handleImageUpload = (event) => {
+      //   const files = event.target.files;
+      //   const formData = new FormData();
+      //   formData.append("sponsor_logo", files[0]);
+
+      //   fetch("/add", {
+      //     method: "POST",
+      //     body: formData,
+      //   })
+      //     .then((response) => response.json())
+      //     .then((data) => {
+      //       console.log(data.path);
+      //     })
+      //     .catch((error) => {
+      //       console.error(error);
+      //     });
+      // };
+      // document.querySelector("#sponsor_logo").addEventListener("change", (event) => {
+      //   data.sponsor_logo = event.target.files;
+      //   // handleImageUpload(event);
+      // });
+      $(".btn").click((e)=> {
+        let formData = new FormData();
+        formData.append("sponsor_logo", $("#sponsor_logo").prop('files')[0]);
+        formData.append("meal_option_1", $('input[name=meal_image_1]').prop('files')[0])
+        formData.append("meal_option_2", $('input[name=meal_image_2]').prop('files')[0])
+        formData.append("meal_option_3", $('input[name=meal_image_3]').prop('files')[0] )
+        formData.append("date", $("input[name=date]").val());
+        formData.append("comment", $("input[name=comment]").val());
+        formData.append("location", $("input[name=location]").val());
+        formData.append("max_booking", $("input[name=max_booking]").val());
+        formData.append("sponsor_name", $("input[name=sponsor_name]").val());
+        formData.append("sponsor_address", $("input[name=sponsor_address]").val());
+        formData.append("event_detail", $("input[name=event_detail]").val());
+
+        // data = {
+        //   date: $("input[name=date]").val(),
+        //   comment: $('input[name=comment]').val(),
+        //   location: $('input[name=location]').val(),
+        //   max_booking: $('input[name=max_booking]').val(),
+        //   sponsor_name: $('input[name=comment]').val(),
+        //   sponsor_address: $('input[name=sponsor_address]').val(),
+        //   event_detail: $('textarea[name=event_detail]').val(),
+        //   meal_option: [
+        //     {
+        //       text: $('input[name=meal_name_1]').val(),
+        //     },
+        //     {
+        //       text: $('input[name=meal_name_2]').val(),
+        //     },
+        //     {
+        //       text: $('input[name=meal_name_3]').val(),
+        //     }
+        //   ],
+        // };
         $.ajax({
-          url: "/api/v1/user",
+          url: "/api/v1/event",
           type: "POST",
-          data,
-        })
-          .then((d) => {
-            MessengerExtensions.requestCloseBrowser();
-          })
-          .fail((e) => {
-            //console.log(e.responseJSON.message);
-          });
+          data: formData,
+        }).then(d => {
+          document.getElementById("frmEvent").reset();
+        });
       });
       $("#datetime12").combodate({
         minYear: 1975,
@@ -419,8 +448,9 @@
           minimumResultsForSearch: 20,
           dropdownParent: $(this).next(".dropDownSelect2"),
         });
-      });
+      }); 
     </script>
+
     <!--===============================================================================================-->
     <script src="/vendor/daterangepicker/moment.min.js"></script>
     <script src="/vendor/daterangepicker/daterangepicker.js"></script>

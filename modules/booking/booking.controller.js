@@ -28,11 +28,22 @@ class Controller {
         payload.token = token;
 
         let query = { time: event.date.getTime(), location: event.location };
-        await BookingModel.create(payload);
+        let booking = await BookingModel.findOneAndUpdate(
+          { work_email: payload.work_email },
+          payload,
+          { new: true, upsert: true }
+        );
         await mailer.sendVerificationEmail(payload, query);
-        return Promise.resolve({ message: "Verification email sent." });
+        return Promise.resolve({
+          message: "Verification email sent.",
+          booking,
+        });
       }
     }
+  }
+
+  async getBookingbyId(id) {
+    return BookingModel.findOne({ _id: id });
   }
 
   //check token here for same user

@@ -46,15 +46,15 @@ router.post("/changeimage", upload.single("image"), async (req, res, next) => {
   }
 });
 
-// router.post("/changeText", async (req, res, next) => {
-//   if (!req.body.text) {
-//     res.send({
-//       success: false,
-//       message: "No overlay text found. Send an overlay text.",
-//     });
-//   }
-//   let data = await Controller.updateText(req.body.text);
-//   res.json(data);
-// });
+router.post("/changetext", async (req, res, next) => {
+  try {
+    let data = await Controller.updateText(req.body.text);
+    if (data) {
+      res.json(data);
+    }
+  } catch (e) {
+    console.log(e);
+  }
+});
 
 module.exports = router;

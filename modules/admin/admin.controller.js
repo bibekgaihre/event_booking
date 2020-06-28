@@ -1,8 +1,10 @@
 const AdminModel = require("./admin.model");
 const bcrypt = require("bcryptjs");
+const mongoose = require("mongoose");
 
 const checkAuth = async (payload) => {
   let user = await AdminModel.findOne({ email: payload.email }).exec();
+
   if (!user) {
     return Promise.resolve({
       message: "Email or Password is incorrect. Please try again",

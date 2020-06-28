@@ -184,23 +184,40 @@
     </div>
     <div class="container-contact100">
       <div class="wrap-contact100">
-        <form class="contact100-form validate-form">
-          <span class="contact100-form-title">
-            Edit Web Content
-          </span>
+        <!-- <form class="contact100-form validate-form"> -->
+        <span class="contact100-form-title">
+          Edit Web Content
+        </span>
 
-          <div
-            class="wrap-input100 validate-input bg1"
-            data-validate="Please Type the Overlay text"
-          >
-            <span class="label-input100">OverLay Text *</span>
-            <input
-              class="input100"
-              type="text"
-              name="overlay_text"
-              placeholder="Enter Overlay Text"
-            />
-          </div>
+        <div
+          class="wrap-input100 validate-input bg1"
+          data-validate="Please Type the Overlay text"
+        >
+          <span class="label-input100">OverLay Text *</span>
+          <input
+            class="input100"
+            type="text"
+            name="overlay_text"
+            id="overlay_text"
+            placeholder="Enter Overlay Text"
+          />
+        </div>
+        <div class="container-contact100-form-btn">
+          <button class="btn contact100-form-btn" type="button" id="btnhead">
+            <span>
+              Update Heading
+              <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+            </span>
+          </button>
+        </div>
+        <br />
+        <br />
+        <form
+          method="POST"
+          action=""
+          id="frmimage"
+          enctype="multipart/form-data"
+        >
           <div class="wrap-input100 validate-input bg1" data-validate="">
             <span class="label-input100">Heading Image</span>
             <input
@@ -208,39 +225,19 @@
               type="file"
               name="image"
               placeholder="Upload Heading Image"
+              id="headingimage"
             />
           </div>
-          <div
-            class="wrap-input100 validate-input bg1"
-            data-validate="Please Type the App store link"
-          >
-            <span class="label-input100">App Store Link *</span>
-            <input
-              class="input100"
-              type="text"
-              name="app_store_link"
-              placeholder="Enter App store Link"
-            />
-          </div>
-          <div
-            class="wrap-input100 validate-input bg1"
-            data-validate="Please Type the Play Store Link"
-          >
-            <span class="label-input100">Play Store Link *</span>
-            <input
-              class="input100"
-              type="text"
-              name="play_store_link"
-              placeholder="Enter Play store Link "
-            />
-          </div>
-          <br />
-          <!-- Here  -->
 
           <div class="container-contact100-form-btn">
-            <button class="btn contact100-form-btn" type="button">
+            <button
+              class="btn contact100-form-btn"
+              type="submit"
+              form="frmimage"
+              id="btnimage"
+            >
               <span>
-                Update Content
+                Update Image
                 <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
               </span>
             </button>
@@ -265,22 +262,72 @@
     <!--===============================================================================================-->
     <script src="/vendor/select2/select2.min.js"></script>
     <script>
-      $(".btn").click(function () {
-        // let shift = dob.split(" ")[2]; //to do am or pm string conversion
-        let data = {
-          image: $("input[name=image]").val(),
-        };
-        $.ajax({
-          url: "/api/v1/general/changeimage",
-          type: "POST",
-          data,
-        })
-          .then((d) => {
-            console.log(d);
+      $("document").ready(function () {
+        $("#btnhead").click(function () {
+          if ($("#overlay_text").val() === "") {
+            swal("Heading is empty.");
+            return false;
+          }
+          let text = $("#overlay_text").val();
+          let data = {
+            text,
+          };
+          $.ajax({
+            method: "POST",
+            url: "/api/v1/general/changetext",
+            data,
           })
-          .fail((e) => {
-            //console.log(e.responseJSON.message);
-          });
+            .then((d) => {
+              swal({
+                title: `Heading text is changed.`,
+                buttons: false,
+                timer: 3000,
+              }).then(() => {
+                location.replace("/admin/content/update");
+              });
+            })
+            .fail((e) => {
+              swal({
+                title: `${e.responseJSON.message}`,
+              });
+            });
+        });
+        $("#frmimage").on("submit", function (e) {
+          console.log("here");
+          e.preventDefault();
+
+          if ($("input[name=image]").val() === "") {
+            swal({
+              title: `Image is not selected. Please select an image and try again.`,
+            });
+            return false;
+          }
+
+          let image = new FormData(this);
+
+          $.ajax({
+            url: "/api/v1/general/changeimage",
+            type: "POST",
+            data: image,
+            contentType: false,
+            cache: false,
+            processData: false,
+          })
+            .then((d) => {
+              swal({
+                title: `Image is changed.`,
+                buttons: false,
+                timer: 3000,
+              }).then(() => {
+                location.replace("/admin/content/update");
+              });
+            })
+            .fail((e) => {
+              swal({
+                title: `${e.responseJSON.message}`,
+              });
+            });
+        });
       });
     </script>
     <!--===============================================================================================-->

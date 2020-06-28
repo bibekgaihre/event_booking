@@ -3,16 +3,25 @@ const Controller = require("./event.controller.js");
 
 router.get("/", async (req, res, next) => {
   //to do filter query params
-  console.log("hello");
+
   let limit = parseInt(req.query.limit) || 27;
   let start = parseInt(req.query.start) || 0;
   let page = parseInt(start) / parseInt(limit) + 1;
   let data = await Controller.list({ limit, start, page });
-  console.log(data);
+
   try {
     res.json(data);
   } catch (e) {
     console.log(e);
+  }
+});
+
+router.get("/getlatestevent", async (req, res, next) => {
+  try {
+    let data = await Controller.getlatestevent();
+    res.json(data);
+  } catch (error) {
+    console.log(error);
   }
 });
 
@@ -31,8 +40,12 @@ router.get("/:id", async (req, res, next) => {
 });
 
 router.post("/", async (req, res, next) => {
-  let data = await Controller.save(req.body);
-  res.json(data);
+  try {
+    let data = await Controller.save(req.body);
+    res.json(data);
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 router.patch("/:id", async (req, res, next) => {

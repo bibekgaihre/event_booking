@@ -14,6 +14,10 @@
     />
     <link rel="stylesheet" href="/main.css" />
     <title>Pulze</title>
+    <script>
+      let fullname = "<%= full_name %>";
+      let date = "<%= date %>";
+    </script>
   </head>
   <body>
     <nav class="navbar navbar-light bg-light">
@@ -34,7 +38,7 @@
               <div class="confirmelem" style="margin-top: 4%;">
                 <h3>
                   <b>
-                    Thank you ${Name} Your booking has been placed!
+                    Thank you <%= full_name %> Your booking has been placed!
                   </b>
                 </h3>
               </div>
@@ -61,7 +65,7 @@
               <div class="confirmelem2">
                 <h4>
                   Please note, your free meal will be delivered on
-                  <b>${date}</b> at <b>12 noon</b>. Please be ready to pickup
+                  <b id="date"></b> at <b>12 noon</b>. Please be ready to pickup
                   your meal from the front entrance.
                 </h4>
               </div>
@@ -85,26 +89,7 @@
             </div>
           </div>
           <br />
-
-          <div class="row" style="padding-left: 6%; padding-right: 6%;">
-            <div class="col-md-5 order-md-1 pr-md-12 col-sm-12">col-sm-8</div>
-            <div class="col-md-7 order-md-1 pr-md-12 col-sm-12">
-              <div class="row">
-                <img
-                  src="/images/icons/appstore_256x256.png"
-                  width="auto"
-                  height="auto"
-                />
-              </div>
-              <div class="row">
-                <img
-                  src="/images/icons/playstore_256x256.png"
-                  width="auto"
-                  height="auto"
-                />
-              </div>
-            </div>
-          </div>
+          <%- include('layouts/store') -%>
         </div>
       </main>
     </div>
@@ -119,6 +104,8 @@
       integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
       crossorigin="anonymous"
     ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.js"></script>
+
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
       integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
@@ -129,5 +116,8 @@
       integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
       crossorigin="anonymous"
     ></script>
+    <script>
+      $("#date").text(moment(new Date(date)).format("LL"));
+    </script>
   </body>
 </html>
