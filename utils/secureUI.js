@@ -9,7 +9,7 @@ const SecureUI = () => {
       req.userData = decoded;
       next();
     } catch (err) {
-      res.redirect("/login");
+      res.redirect("/admin/login");
       res.end();
     }
   };

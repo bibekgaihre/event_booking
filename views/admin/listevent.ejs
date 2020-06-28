@@ -15,21 +15,21 @@
     <link
       rel="stylesheet"
       type="text/css"
-      href="fonts/font-awesome-4.7.0/css/font-awesome.min.css"
+      href="/fonts/font-awesome-4.7.0/css/font-awesome.min.css"
     />
     <!--===============================================================================================-->
 
     <link
       rel="stylesheet"
       type="text/css"
-      href="fonts/iconic/css/material-design-iconic-font.min.css"
+      href="/fonts/iconic/css/material-design-iconic-font.min.css"
     />
     <!--===============================================================================================-->
 
-    <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css" />
+    <link rel="stylesheet" type="text/css" href="/vendor/animate/animate.css" />
 
-    <link rel="stylesheet" type="text/css" href="css/util.css" />
-    <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <link rel="stylesheet" type="text/css" href="/css/util.css" />
+    <link rel="stylesheet" type="text/css" href="/css/main.css" />
     <!--===============================================================================================-->
 
     <style>
@@ -173,15 +173,18 @@
         </table>
       </div>
     </div>
-
+    <%- include('../layouts/foot') -%>
     <script src="/vendor/jquery/jquery-3.2.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+
     <script>
       function updateSentiment(id) {
         $("#u_id").val(id);
       }
       let uTable;
+
       $(document).ready(function () {
         uTable = $("#uTable").DataTable({
           processing: true,
@@ -191,6 +194,8 @@
             "<'row'<'col-sm-4'i><'col-sm-8'<'float-right p-2'p>>>",
           ajax: {
             url: "/api/v1/event/",
+            method: "GET",
+            headers: { Authorization: "Bearer " + Cookies.get("token") },
             // beforeSend: function (request) {
             //     request.setRequestHeader("access_token", $.cookie("access_token"));
             // },
@@ -232,7 +237,7 @@
               data: null,
               class: "text-center",
               render: (d, type, row, meta) => {
-                return `<button type="button" class="btn btn-dark" title="Detail" onclick="window.location.replace('/event/update/${d._id}')"><i class="fa fa-edit"></i> Detail</button>`;
+                return `<button type="button" class="btn btn-dark" title="Detail" onclick="window.location.replace('/admin/event/${d._id}')"><i class="fa fa-edit"></i> Detail</button>`;
               },
             },
           ],

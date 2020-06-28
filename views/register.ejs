@@ -20,13 +20,8 @@
   </head>
   <body>
     <nav class="navbar navbar-light bg-light">
-      <a class="navbar-brand" href="#">
-        <img
-          src="/docs/4.0/assets/brand/bootstrap-solid.svg"
-          width="30"
-          height="30"
-          alt=""
-        />
+      <a class="navbar-brand" href="/">
+        <img width="30" height="30" alt="" />
       </a>
     </nav>
     <div class="container-fluid lay">
@@ -313,14 +308,14 @@
           method: "GET",
           url: "/api/v1/event/" + eventid,
         }).done((d) => {
+          console.log(d);
           $("#location").text(d.location);
           $("#date").text(moment(new Date(d.date)).format("LL"));
           $("#event_detail").text(d.event_detail);
-          $("#sponsor_logo").attr("src", d.sponsor_logo);
+          $("#sponsor_logo").attr("src", "/" + d.sponsor_logo);
           $("#sponsor_name").text(d.sponsor_name);
           $("#sponsor_address").text(d.sponsor_address);
           $.each(d.meal_option, function (i, val) {
-            console.log(i);
             $("#mealoptions").append(
               `     <div class="row">
                         <div class="col-md-12 order-md-1 pr-md-5">
@@ -387,7 +382,7 @@
             "@hotmail.com",
             "@yahoo.com",
             "@msn.com",
-
+            "@outlook.com",
             "@icloud.com",
             "@aol.com",
             "@gmail.com",
@@ -404,7 +399,7 @@
             phone: $("input[name='phone']").val(),
             selected_meal: $("input[name='customRadio']:checked").val(),
           };
-          console.log(data);
+
           //ajax call here
           $.ajax({
             url: "/api/v1/booking/" + eventid,

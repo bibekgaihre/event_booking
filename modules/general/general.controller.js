@@ -14,7 +14,17 @@ class Controller {
     );
     return data;
   }
+  async getData() {
+    let data = await GeneralModel.find();
+    // console.log(data);
+    let mapped = data.map((d) => {
+      return { image: d.image, text: d.overlay_text };
+    });
+    mapped = mapped[0];
+    // console.log(mapped);
 
+    return mapped;
+  }
   async updateText(text) {
     let data = await GeneralModel.findOneAndUpdate(
       {},

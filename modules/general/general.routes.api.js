@@ -3,6 +3,7 @@
 const router = require("express").Router();
 const mailer = require("../../utils/mailer");
 const multer = require("multer");
+const SecureAPI = require("../../utils/secureAPI");
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "./uploads/");
@@ -27,6 +28,15 @@ let upload = multer({
   fileFilter: fileFilter,
 });
 
+router.get("/", async (req, res, next) => {
+  try {
+    let data = await Controller.getData();
+    res.json(data);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 router.post("/sendcontactemail", async (req, res, next) => {
   try {
     let fields = req.body;
@@ -37,16 +47,21 @@ router.post("/sendcontactemail", async (req, res, next) => {
   }
 });
 
-router.post("/changeimage", upload.single("image"), async (req, res, next) => {
-  try {
-    let data = await Controller.updateImage(req.file.path);
-    res.json(data);
-  } catch (e) {
-    console.error(e);
+router.post(
+  "/changeimage",
+  SecureAPI(),
+  upload.single("image"),
+  async (req, res, next) => {
+    try {
+      let data = await Controller.updateImage(req.file.path);
+      res.json(data);
+    } catch (e) {
+      console.error(e);
+    }
   }
-});
+);
 
-router.post("/changetext", async (req, res, next) => {
+router.post("/changetext", SecureAPI(), async (req, res, next) => {
   try {
     let data = await Controller.updateText(req.body.text);
     if (data) {

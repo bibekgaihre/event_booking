@@ -316,6 +316,7 @@
             $.ajax({
                 url: "/api/v1/event/"+ id,
                 type: "PATCH",
+                
                 data,
             }).then(d => {
                 window.location.href = '/admin/event/list'

@@ -17,7 +17,7 @@
   </head>
   <body>
     <nav class="navbar navbar-light bg-light">
-      <a class="navbar-brand" href="#">
+      <a class="navbar-brand" href="/">
         <img
           src="https://www.google.com/gmail/about/static/images/logo-gmail.png?cache=3218fbf"
           width="70px"
@@ -30,15 +30,9 @@
         <div class="container">
           <div class="row">
             <div class="col-md-12 order-md-1 text-center pr-md-5">
-              <img
-                src="https://cdn.pixabay.com/photo/2015/07/12/14/26/coffee-842020_960_720.jpg"
-                class="img-fluid"
-              />
+              <img id="headerimg" class="img-fluid" />
               <div class="headingtext">
-                <h1>
-                  Here at Pulze we're buying our frontline healthcare workers a
-                  meal to say thanks.
-                </h1>
+                <h1 id="headingtext"></h1>
               </div>
             </div>
           </div>
@@ -89,66 +83,7 @@
             </div>
           </div>
           <div class="row" style="box-sizing: border-box;">
-            <div class="maingrid">
-              <div class="cards">
-                <div class="innercard">
-                  <div class="innercard1 text-center">
-                    <div class="location"><b>TAN TOCK SENG HOSPITAL</b></div>
-                    <div class="eventdate">
-                      <b><u>10 June 2020</u></b>
-                    </div>
-                  </div>
-                  <div class="innercard2">
-                    <div class="comment text-center">
-                      2pm, Annex C(outside food court)
-                    </div>
-                    <div class="subhead"><b>Sponsored by:</b></div>
-                    <div class="row" style="padding-left: 5%;">
-                      <div class="col-md-4 col-lg-4 col-sm-3">
-                        <img
-                          src="https://www.google.com/gmail/about/static/images/logo-gmail.png?cache=3218fbf"
-                          width="70px"
-                          height="auto"
-                        />
-                      </div>
-                      <div class="col-md-8 col-lg-8 col-sm-8">
-                        <div class="sponsorname">
-                          <b
-                            ><u>
-                              Google Corporation
-                            </u>
-                          </b>
-                        </div>
-                        <div class="sponsoraddress">
-                          Los Angeles, USAssadsad
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-11 col-lg-11">
-                        <button
-                          type="button"
-                          class="btn btn-primary btn-sm btnall"
-                          style="float: right;"
-                        >
-                          <b>Book Now</b>
-                        </button>
-                      </div>
-                      <!-- <div class="col-md-5 col-lg-5"></div> -->
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="cards">
-                <div class="transcard text-center">
-                  Fully Booked
-                </div>
-              </div>
-              <div class="cards">3</div>
-              <div class="cards">4</div>
-              <div class="cards">5</div>
-              <div class="cards">6</div>
-            </div>
+            <div class="maingrid"></div>
           </div>
 
           <div class="row">
@@ -276,14 +211,21 @@
 
         $.ajax({
           method: "GET",
+          url: "/api/v1/general/",
+        }).done((d) => {
+          $("#headingtext").text(d.text);
+          $("#headerimg").attr("src", d.image);
+        });
+
+        $.ajax({
+          method: "GET",
           url: "/api/v1/event/getlatestevent",
         }).done((d) => {
           $.each(d, function (i, val) {
             if (val.result === 1) {
               $(".maingrid").append(
                 ` <div class="cards">
-                  <div class="transcard text-center">
-                  Fully Booked
+                 
                   <div class="innercard">
                   <div class="innercard1 text-center">
                     <div class="location"><b>${val.location}</b></div>
@@ -323,21 +265,21 @@
                     </div>
                     <div class="row">
                       <div class="col-md-11 col-lg-11">
-                        <a href="/event/${val._id}">
+                      
                         <button
                           type="button"
-                          class="btn btn-primary btn-sm btnall"
+                          class="btn btn-danger btn-sm btnall"
                           style="float: right;"
-                          hidden
+                          disabled
                         >
-                          <b>Book Now</b>
+                          <b>Fully Booked</b>
                         </button>
-                        </a>
+                     
                       </div>
                       <!-- <div class="col-md-5 col-lg-5"></div> -->
                     </div>
                   </div>
-                </div>
+                
             
                 
               </div>`
