@@ -1,5 +1,24 @@
+const fs = require("fs");
+const path = require("path");
+const multer = require("multer");
 const router = require("express").Router();
 const Controller = require("./event.controller.js");
+
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "public/images/events");
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + new Date().getTime() + ".jpg");
+  },
+});
+
+var upload = multer({ storage: storage }).any();
+
+router.get("/:id", async (req, res, next) => {
+  let data = await Controller.getById(req.params.id);
+  res.json(data);
+});
 
 router.get("/", async (req, res, next) => {
   //to do filter query params
@@ -33,23 +52,20 @@ router.get("/download/:id", async (req, res, next) => {
   res.set("Content-Type", "text/csv");
   res.status(200).send(data);
 });
-
 router.get("/:id", async (req, res, next) => {
   let data = await Controller.getById(req.params.id);
   res.json(data);
 });
 
-router.post("/", async (req, res, next) => {
-  try {
-    let data = await Controller.save(req.body);
-    res.json(data);
-  } catch (error) {
-    console.log(error);
-  }
+
+router.post("/", upload, async (req, res, next) => {
+  let data = await Controller.save(req.body, req.files);
+  res.json(data);
 });
 
-router.patch("/:id", async (req, res, next) => {
-  let data = await Controller.updateById(req.params.id, req.body);
+  
+router.patch("/:id", upload, async (req, res, next) => {
+  let data = await Controller.updateById(req.params.id, req.body, req.files);
   res.json(data);
 });
 

@@ -19,11 +19,36 @@ class Controller {
     };
   }
 
-  save(payload) {
-    console.log(payload);
-    return;
-    let { sponsor_logo } = payload;
-    return EventModel.create(payload);
+
+  // add event
+  save(payload, files) {
+    payload.meal_option = [
+      { text: payload.meal_name_1 },
+      { text: payload.meal_name_2 },
+      { text: payload.meal_name_3 },
+    ];
+
+    if (files) {
+      files.forEach((file) => {
+        if (file.fieldname === "sponsor_logo") {
+          payload.sponsor_logo = file.destination + "/" + file.filename;
+        }
+        if (file.fieldname === "meal_image_1") {
+          payload.meal_option[0].image = file.destination + "/" + file.filename;
+        }
+        if (file.fieldname === "meal_image_2") {
+          payload.meal_option[1].image = file.destination + "/" + file.filename;
+        }
+        if (file.fieldname === "meal_image_3") {
+          payload.meal_option[2].image = file.destination + "/" + file.filename;
+        }
+      });
+    }
+    return EventModel.findOneAndUpdate(
+      { date: payload.date, location: payload.location },
+      payload,
+      { new: true, upsert: true }
+    );
   }
   async getlatestevent() {
     //only list event which are coming near , o past events maximum 6 events
@@ -41,10 +66,35 @@ class Controller {
     return data;
   }
   //edit event but cannot be edited on event date (eventData !== Date.now())
-  async updateById(id, payload) {
-    if (payload.date === Date.now()) return null;
-    let data = await EventModel.findOneAndUpdate({ _id: id }, payload);
-    return data;
+
+  async updateById(id, payload, files) {
+    payload.meal_option = [
+      { text: payload.meal_name_1 },
+      { text: payload.meal_name_2 },
+      { text: payload.meal_name_3 },
+    ];
+
+    if (files) {
+      files.forEach((file) => {
+        if (file.fieldname === "sponsor_logo") {
+          payload.sponsor_logo = file.destination + "/" + file.filename;
+        }
+        if (file.fieldname === "meal_image_1") {
+          payload.meal_option[0].image = file.destination + "/" + file.filename;
+        }
+        if (file.fieldname === "meal_image_2") {
+          payload.meal_option[1].image = file.destination + "/" + file.filename;
+        }
+        if (file.fieldname === "meal_image_3") {
+          payload.meal_option[2].image = file.destination + "/" + file.filename;
+        }
+      });
+    }
+    let event = await this.getById(id);
+    return new Date(event.date).setHours(0, 0, 0, 0) !==
+      new Date().setHours(0, 0, 0, 0)
+      ? await EventModel.updateOne({ _id: id }, payload)
+      : null;
   }
 
   //delete event
