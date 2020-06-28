@@ -1,7 +1,10 @@
 const router = require("express").Router();
 
-router.get("/:id", (req, res, next) => {
-  res.render("admin/editevent", { id: req.params.id });
-});
+
+
+router.get("/:id", async (req, res, next) => {
+  let eventid = req.params.id;
+  res.render("register", { eventid });
+}
 
 module.exports = router;

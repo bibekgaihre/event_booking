@@ -4,9 +4,21 @@ const { convertJSONToCSV } = require("../../utils/json2csv");
 class Controller {
   constructor() {}
   //list event
-  list() {
-    return EventModel.find({});
+  async list({ limit, start, page }) {
+    let total = await EventModel.countDocuments();
+    let data = await EventModel.find()
+      .skip(start)
+      .limit(limit)
+      .sort({ created_at: -1 });
+    return {
+      total,
+      limit,
+      start,
+      page,
+      data,
+    };
   }
+
 
   // add event
   save(payload, files) {
@@ -38,8 +50,23 @@ class Controller {
       { new: true, upsert: true }
     );
   }
+  async getlatestevent() {
+    //only list event which are coming near , o past events maximum 6 events
+    let data = await EventModel.find({ date: { $gte: new Date() } })
+      .limit(6)
+      .sort({ date: +1 });
 
+    data.forEach((d, i) => {
+      if (d.booking.length === d.max_booking) {
+        d.result = 1;
+      } else if (d.booking.length < d.max_booking) {
+        d.result = 0;
+      }
+    });
+    return data;
+  }
   //edit event but cannot be edited on event date (eventData !== Date.now())
+
   async updateById(id, payload, files) {
     payload.meal_option = [
       { text: payload.meal_name_1 },
@@ -92,7 +119,7 @@ class Controller {
         location,
         comment
       );
-      console.log(data);
+
       return data;
     } catch (e) {
       console.log(e);

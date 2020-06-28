@@ -1,43 +1,60 @@
 // const { NotExtended } = require("http-errors");
 
-// const router = require("express").Router();
-// const mailer = require("../../utils/mailer");
-// const multer = require("multer");
-// const Controller = require("./general.controller");
+const router = require("express").Router();
+const mailer = require("../../utils/mailer");
+const multer = require("multer");
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "./uploads/");
+  },
+  filename: function (req, file, cb) {
+    cb(null, new Date().toISOString() + file.originalname);
+  },
+});
+const Controller = require("./general.controller");
 
-// let Upload = multer({
-//   storage: memoryStorage,
-//   fileFilter(req, file, next) {
-//     next(null, true);
-//   },
-// }).single();
+const fileFilter = (req, file, cb) => {
+  if (file.mimetype === "image/jpeg" || file.mimetype === "image/png") {
+    cb(null, true);
+  } else {
+    cb(null, false);
+  }
+};
 
-// router.post("/sendcontactemail", async (req, res, next) => {
-//   try {
-//     let fields = req.body;
-//     let data = await mailer.sendContactEmail(fields);
-//     res.send(data);
-//   } catch (error) {
-//     console.log(error);
-//   }
-// });
+let upload = multer({
+  storage: storage,
+  limits: { fileSize: 1024 * 1024 * 4 },
+  fileFilter: fileFilter,
+});
 
-// router.post("/changeImage", async (req, res, next) => {
-//   Upload(req, res, async () => {
-//     let data = await Controller.updateImage(req.files);
-//     res.json(data);
-//   });
-// });
+router.post("/sendcontactemail", async (req, res, next) => {
+  try {
+    let fields = req.body;
+    let data = await mailer.sendContactEmail(fields);
+    res.send(data);
+  } catch (error) {
+    console.log(error);
+  }
+});
 
-// router.post("/changeText", async (req, res, next) => {
-//   if (!req.body.text) {
-//     res.send({
-//       success: false,
-//       message: "No overlay text found. Send an overlay text.",
-//     });
-//   }
-//   let data = await Controller.updateText(req.body.text);
-//   res.json(data);
-// });
+router.post("/changeimage", upload.single("image"), async (req, res, next) => {
+  try {
+    let data = await Controller.updateImage(req.file.path);
+    res.json(data);
+  } catch (e) {
+    console.error(e);
+  }
+});
 
-// module.exports = router;
+router.post("/changetext", async (req, res, next) => {
+  try {
+    let data = await Controller.updateText(req.body.text);
+    if (data) {
+      res.json(data);
+    }
+  } catch (e) {
+    console.log(e);
+  }
+});
+
+module.exports = router;

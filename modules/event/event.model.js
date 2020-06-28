@@ -37,6 +37,10 @@ const EventSchema = mongoose.Schema(
       min: 1,
       max: 3,
     },
+    result: {
+      type: Number,
+      default: null,
+    },
     max_booking: {
       type: Number,
     },

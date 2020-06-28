@@ -5,7 +5,7 @@ const generalRouter = require("../modules/general/general.routes.api");
 const adminRouter = require("../modules/admin/admin.routes.api");
 
 router.use("/admin", adminRouter);
-// router.use("/general", generalRouter);
+router.use("/general", generalRouter);
 router.use("/event", eventRouter);
 router.use("/booking", bookingRouter);
 

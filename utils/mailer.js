@@ -28,21 +28,27 @@ class Mailer {
       //   accessToken: config.get("mail.token");
       // },
     });
-
-    let info = await transporter.sendMail({
-      from: '"GiveAway   <giveaway@onpulze.com>" ', // sender address
-      to: payload.work_email, // list of receivers
-      subject: "Email Verification", // Subject line
-      text: "A Booking for your account was requested", // plain text body
-      html:
-        "Please click the button below to Verify your event booking.<br><a href=" +
-        link +
-        ">" +
-        "<h2>Verify Your Event Booking</h2>" +
-        "</a>", // html body
-    });
-
-    return info;
+    try {
+      let info = await transporter.sendMail({
+        from: '"GiveAway   <giveaway@onpulze.com>" ', // sender address
+        to: payload.work_email, // list of receivers
+        subject: "Email Verification", // Subject line
+        text: "A Booking for your account was requested", // plain text body
+        html:
+          "Please click the button below to Verify your event booking.<br><a href=" +
+          link +
+          ">" +
+          "<h2>Verify Your Event Booking</h2>" +
+          "</a>", // html body
+      });
+      if (info.messageId) {
+        return Promise.resolve({
+          message: "Verification Email sent. Please check your inbox",
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
   async sendContactEmail(fields) {
     console.log(fields);

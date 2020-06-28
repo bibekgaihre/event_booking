@@ -9,8 +9,7 @@ router.get("/verify/:token", async (req, res, next) => {
     let query = { time: req.query.time, location: req.query.location };
     let token = req.params.token;
     let data = await Controller.verifyBooking(query, token);
-
-    res.json(data);
+    res.send(data.message);
   } catch (error) {
     console.log(error);
   }
