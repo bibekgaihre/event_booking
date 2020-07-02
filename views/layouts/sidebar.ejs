@@ -5,25 +5,50 @@
     </a>
   </li>
   <li>
-    <a href="/admin/content/update">
+    <a class="update" href="/admin/content/update">
       <h6><i class="fa fa-clipboard" aria-hidden="true"></i>Update Content</h6>
     </a>
   </li>
   <li>
-    <a href="/admin/event/add">
+    <a class="add" href="/admin/event/add">
       <h6><i class="fa fa-users" aria-hidden="true"></i>Add event</h6>
     </a>
   </li>
 
   <li>
-    <a href="/admin/event/list">
+    <a class="view" href="/admin/event/list">
       <h6><i class="fa fa-star" aria-hidden="true"></i>View Events</h6>
     </a>
   </li>
-
+  <li>
+    <a class="change" href="/admin/changepassword">
+      <h6><i class="fa fa-login" aria-hidden="true"></i>Change Password</h6>
+    </a>
+  </li>
   <li>
     <a href="/logout">
       <h6><i class="fa fa-info-circle" aria-hidden="true"></i>Logout</h6>
     </a>
   </li>
 </ul>
+<script src="/vendor/jquery/jquery-3.2.1.min.js"></script>
+<script>
+  if (window.location.pathname === "/admin/event/list") {
+    $(".view").addClass("active");
+  }
+  if (window.location.pathname === "/admin/event/add") {
+    $(".add").addClass("active");
+  }
+  if (window.location.pathname === "/admin/changepassword") {
+    $(".change").addClass("active");
+  }
+  if (window.location.pathname === "/admin/content/update") {
+    $(".update").addClass("active");
+  }
+</script>
+
+<style>
+  .active {
+    background-color: #2b77c7;
+  }
+</style>

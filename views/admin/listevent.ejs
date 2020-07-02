@@ -43,6 +43,7 @@
         height: 100%;
         left: 0;
         overflow-x: hidden;
+        flex-direction: column;
         overflow-y: auto;
         background: #1a1a1a;
         color: #fff;
@@ -117,62 +118,66 @@
   </head>
 
   <body>
-    <div class="pos-f-t" style="background-color: #1a1a1a;">
-      <!-- <div class="collapse" id="navbarToggleExternalContent">
+    <div class="full_height" style="display: flex; flex-direction: column;">
+      <div class="pos-f-t" style="background-color: #1a1a1a;">
+        <!-- <div class="collapse" id="navbarToggleExternalContent">
               
           </div> -->
-      <nav class="navbar navbar-dark">
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarToggleExternalContent"
-          aria-controls="navbarToggleExternalContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div>
-          <h4 class="text-white">
-            Pulze
-            <small
-              class="text-white"
-              style="font-family: cursive; font-size: 15px;"
-              >Giveaway</small
-            >
-          </h4>
+        <nav class="navbar navbar-dark">
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarToggleExternalContent"
+            aria-controls="navbarToggleExternalContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div>
+            <h4 class="text-white">
+              Pulze
+              <small
+                class="text-white"
+                style="font-family: cursive; font-size: 15px;"
+                >Giveaway</small
+              >
+            </h4>
+          </div>
+        </nav>
+      </div>
+      <div class="sidebar-container">
+        <div class="sidebar-logo text-center">
+          <br /><br />
+          <!-- <img src="/images/icons/LOGO.png" width="100%" height="auto" /> -->
         </div>
-      </nav>
-    </div>
-    <div class="sidebar-container">
-      <div class="sidebar-logo text-center">
-        <br /><br />
-        <!-- <img src="/images/icons/LOGO.png" width="100%" height="auto" /> -->
+        <br />
+        <%- include('../layouts/sidebar') -%>
       </div>
-      <br />
-      <%- include('../layouts/sidebar') -%>
-    </div>
-    <div class="container">
-      <div class="col-md-10 col-sm-10">
-        <table
-          id="uTable"
-          class="table table-striped table-bordered"
-          style="width: 100%;"
-        >
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Location</th>
-              <th>Sponsor Name</th>
-              <th>Download</th>
-              <th>Details</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
+      <div class="container">
+        <div class="col-md-10 col-sm-10" style="margin: 0 auto;">
+          <table
+            id="uTable"
+            class="table table-striped table-bordered"
+            style="width: 100%;"
+          >
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Location</th>
+                <th>Sponsor Name</th>
+                <th>Download</th>
+                <th>Details</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
       </div>
     </div>
+
     <%- include('../layouts/foot') -%>
     <script src="/vendor/jquery/jquery-3.2.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
@@ -238,6 +243,27 @@
               class: "text-center",
               render: (d, type, row, meta) => {
                 return `<button type="button" class="btn btn-dark" title="Detail" onclick="window.location.replace('/admin/event/${d._id}')"><i class="fa fa-edit"></i> Detail</button>`;
+              },
+            },
+            {
+              data: null,
+              class: "text-center",
+              render: (d, type, row, meta) => {
+                console.log(
+                  new Date(d.date).toLocaleDateString(),
+                  new Date().toLocaleDateString()
+                );
+                if (
+                  new Date(d.date).toLocaleDateString() <
+                  new Date().toLocaleDateString()
+                ) {
+                  return `Expired`;
+                } else if (
+                  new Date(d.date).toLocaleDateString() >
+                  new Date().toLocaleDateString()
+                ) {
+                  return "Upcoming";
+                }
               },
             },
           ],

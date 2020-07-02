@@ -21,11 +21,22 @@ class Controller {
 
   // add event
   save(payload, files) {
-    payload.meal_option = [
-      { text: payload.meal_name_1 },
-      { text: payload.meal_name_2 },
-      { text: payload.meal_name_3 },
-    ];
+    payload.meal_option = [];
+    if (payload.meal_name_1)
+      payload.meal_option.push({
+        text: payload.meal_name_1,
+        image: payload.meal_1,
+      });
+    if (payload.meal_name_2)
+      payload.meal_option.push({
+        text: payload.meal_name_2,
+        image: payload.meal_2,
+      });
+    if (payload.meal_name_3)
+      payload.meal_option.push({
+        text: payload.meal_name_3,
+        image: payload.meal_3,
+      });
 
     if (files) {
       files.forEach((file) => {
@@ -43,6 +54,7 @@ class Controller {
         }
       });
     }
+
     return EventModel.findOneAndUpdate(
       { date: payload.date, location: payload.location },
       payload,

@@ -1,6 +1,8 @@
 const AdminModel = require("./admin.model");
 const bcrypt = require("bcryptjs");
 const mongoose = require("mongoose");
+const config = require("config");
+const { has } = require("config");
 
 const checkAuth = async (payload) => {
   let user = await AdminModel.findOne({ email: payload.email }).exec();
@@ -31,4 +33,30 @@ const createAdmin = async (payload) => {
   return data;
 };
 
-module.exports = { checkAuth, createAdmin };
+const changePassword = async (payload) => {
+  let email = await AdminModel.find({}).exec();
+
+  let chkPass = await bcrypt.compare(payload.current_pass, email[0].password);
+
+  if (chkPass) {
+    //update password
+    let salt = await bcrypt.genSalt(10);
+    let hash = await bcrypt.hash(payload.new_pass, salt);
+
+    await AdminModel.findOneAndUpdate(
+      { email: email[0].email },
+      { password: hash }
+    );
+    return Promise.resolve({
+      message: "Password has been changed. You will be redirected to Login",
+      code: 200,
+    });
+  } else {
+    return Promise.resolve({
+      message: "Please enter a correct new password.",
+      code: 403,
+    });
+  }
+};
+
+module.exports = { checkAuth, createAdmin, changePassword };

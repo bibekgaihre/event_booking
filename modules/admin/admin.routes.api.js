@@ -3,6 +3,8 @@ const config = require("config");
 const AdminController = require("./admin.controller");
 const jwt = require("jsonwebtoken");
 
+const SecureAPI = require("../../utils/secureAPI");
+
 router.post("/login", async (req, res, next) => {
   let payload = req.body;
   try {
@@ -30,6 +32,15 @@ router.post("/login", async (req, res, next) => {
   }
 });
 
+router.post("/changepassword", SecureAPI(), async (req, res, next) => {
+  try {
+    let payload = req.body;
+    let data = await AdminController.changePassword(payload);
+    res.json(data);
+  } catch (error) {
+    return error;
+  }
+});
 router.post("/", async (req, res, next) => {
   let payload = req.body;
   const data = await AdminController.createAdmin(payload);

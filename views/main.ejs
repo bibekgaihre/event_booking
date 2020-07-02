@@ -16,7 +16,7 @@
     <title>Pulze</title>
   </head>
   <body>
-    <nav class="navbar navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <a class="navbar-brand" href="/">
         <img
           src="https://www.google.com/gmail/about/static/images/logo-gmail.png?cache=3218fbf"
@@ -24,6 +24,22 @@
           height="auto"
         />
       </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarText"
+        aria-controls="navbarText"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <span class="navbar-nav ml-auto">
+          <a class="nav-link" href="/admin/event/list">Admin Login</a>
+        </span>
+      </div>
     </nav>
     <div class="container-fluid lay">
       <main id="content" class="bd-masthead" role="main">
@@ -362,6 +378,7 @@
             $("#msg").show();
             return false;
           }
+          $(this).prop("disabled", true);
           let data = {
             name: $("input[name='name']").val(),
             mobile_number: $("input[name='mobile_number']").val(),
