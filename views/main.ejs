@@ -238,6 +238,10 @@
           url: "/api/v1/event/getlatestevent",
         }).done((d) => {
           $.each(d, function (i, val) {
+            let e = new Date(val.date);
+            e = e.toLocaleString("en-US", { hour: "numeric", hour12: true });
+            e = e.slice(-2);
+
             if (val.result === 1) {
               $(".maingrid").append(
                 ` <div class="cards">
@@ -251,7 +255,12 @@
                   </div>
                   <div class="innercard2">
                     <div class="comment text-center">
-                      ${val.comment}
+                      ${
+                        new Date(val.date).getHours() +
+                        ":" +
+                        new Date(val.date).getMinutes() +
+                        e
+                      },${val.comment}
                     </div>
                     <div class="subhead"><b>Sponsored by:</b></div>
                     <div class="row" style="padding-left: 5%;">
@@ -313,7 +322,12 @@
                   </div>
                   <div class="innercard2">
                     <div class="comment text-center">
-                      ${val.comment}
+                      ${
+                        new Date(val.date).getHours() +
+                        ":" +
+                        new Date(val.date).getMinutes() +
+                        e
+                      },${val.comment}
                     </div>
                     <div class="subhead"><b>Sponsored by:</b></div>
                     <div class="row" style="padding-left: 5%;">

@@ -17,6 +17,12 @@
     <script>
       let fullname = "<%= full_name %>";
       let date = "<%= date %>";
+      let e = new Date(date);
+      e = e.toLocaleString("en-US", { hour: "numeric", hour12: true });
+      e = e.slice(-2);
+
+      let d =
+        new Date(date).getHours() + ":" + new Date(date).getMinutes() + " " + e;
     </script>
   </head>
   <body>
@@ -60,8 +66,8 @@
               <div class="confirmelem2">
                 <h4>
                   Please note, your free meal will be delivered on
-                  <b id="date"></b> at <b>12 noon</b>. Please be ready to pickup
-                  your meal from the front entrance.
+                  <b id="date"></b> at <b id="time"></b>. Please be ready to
+                  pickup your meal from the front entrance.
                 </h4>
               </div>
             </div>
@@ -113,6 +119,7 @@
     ></script>
     <script>
       $("#date").text(moment(new Date(date)).format("LL"));
+      $("#time").text(d);
     </script>
   </body>
 </html>

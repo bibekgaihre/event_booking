@@ -222,7 +222,7 @@
               data: null,
               class: "text-center",
               render: (d, type, row, meta) => {
-                return new Date(d.date).toLocaleDateString();
+                return new Date(d.date).toLocaleString();
               },
             },
             {
@@ -249,19 +249,9 @@
               data: null,
               class: "text-center",
               render: (d, type, row, meta) => {
-                console.log(
-                  new Date(d.date).toLocaleDateString(),
-                  new Date().toLocaleDateString()
-                );
-                if (
-                  new Date(d.date).toLocaleDateString() <
-                  new Date().toLocaleDateString()
-                ) {
+                if (new Date(d.date) < new Date()) {
                   return `Expired`;
-                } else if (
-                  new Date(d.date).toLocaleDateString() >
-                  new Date().toLocaleDateString()
-                ) {
+                } else if (new Date(d.date) > new Date()) {
                   return "Upcoming";
                 }
               },

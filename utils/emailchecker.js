@@ -7,7 +7,7 @@ const checkEmail = () => {
         "@yahoo.com",
         "@msn.com",
         "@icloud.com",
-        "@outlook.com",
+
         "@aol.com",
         "@gmail.com",
       ];

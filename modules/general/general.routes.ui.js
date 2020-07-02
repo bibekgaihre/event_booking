@@ -8,6 +8,7 @@ router.get("/", async (req, res, next) => {
 
 router.get("/confirm/:eventid/:bookingid", async (req, res, next) => {
   let event = await EventController.getById(req.params.eventid);
+
   let booking = await BookingController.getBookingbyId(req.params.bookingid);
 
   res.render("confirmation", {

@@ -166,9 +166,9 @@ enctype="multipart/form-data">
     Update Event
 </span>
 <div class="wrap-input100 bg1">
-    <span class="label-input100">Date ( DD / MM / YYYY ) *</span><br />
-    <input type="text" class="input100" id="datetime12" data-format="DD-MM-YYYY" name="date"
-        data-template="DD / MM / YYYY" name="datetime" />    </div>
+    <span class="label-input100">Date ( MM / DD / YYYY ) *</span><br />
+    <input type="text" class="input100" id="datetime12" data-format="MM-DD-YYYY hh:mm a" name="date"
+        data-template="MM / DD / YYYY hh : mm a" name="datetime" />    </div>
 <div class="wrap-input100 validate-input bg1" data-validate="Please Type the Location">
     <span class="label-input100">Location *</span>
     <input class="input100" type="text" name="location" placeholder="Enter Location" />
@@ -285,10 +285,33 @@ enctype="multipart/form-data">
             url: `/api/v1/event/${id}`
         }).then(d => {
             // d.date= new Date(d.date).toLocaleDateString('en-US')
-            $(".month").val(new Date(d.date).getMonth() );
-            $(".year").val(new Date(d.date).getFullYear());
-            $(".day").val(new Date(d.date).getUTCDate());
+            let e=new Date(d.date);
+            e=e.toLocaleString('en-US', { hour: 'numeric', hour12: true });
+            let h=e.match(/\d/g);
+            h=h.join("");
+     
+            e=e.slice(-2);
+        
+            let date=new Date(d.date).toLocaleString();
+            if(e==="PM" && h.length===1){
+                h="0"+h;
+            }
+            if(e==="PM" && h.length===2){
             
+            }
+            else{
+                h=new Date(date).getHours();
+            }
+            console.log(h);
+            // date=new Date(date);
+            // console.log(new Date(date).getHours());
+            $(".month").val(new Date(date).getMonth());
+            $(".year").val(new Date(date).getFullYear());
+            $(".day").val(new Date(date).getDate());
+            $(".hour").val(Number(h));
+            $(".minute").val(new Date(date).getMinutes());
+            
+            $(".ampm").val(e.toLowerCase());
             $("input[name=date]").val(d.date);
             $('input[name=comment]').val(d.comment);
             $('input[name=location]').val(d.location);

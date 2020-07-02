@@ -20,7 +20,7 @@ class Controller {
   }
 
   // add event
-  save(payload, files) {
+  async save(payload, files) {
     payload.meal_option = [];
     if (payload.meal_name_1)
       payload.meal_option.push({
