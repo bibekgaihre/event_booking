@@ -1,0 +1,21 @@
+{
+    "app": {
+      "name": "eventbooking",
+      "port": 5000,
+      "secret": "rwp*luNrhZ2ipJNUzLLwztQSF1GC)Ugp",
+      "url": "http://localhost:5000"
+    },
+    "db": {
+      "url": "mongodb://localhost:27017/giveaway"
+    },
+    "jwt": {
+      "duration": 3600000,
+      "duration_long": 604800000
+    },
+    "mail": {
+      "username": "your email",
+      "password": "your password",
+      "token": "if auth token used only"
+    }
+  }
+  
