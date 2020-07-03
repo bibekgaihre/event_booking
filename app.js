@@ -10,7 +10,7 @@ const config = require("config");
 var indexRouter = require("./routes/index");
 var app = express();
 
-mongoose.connect(config.get("db.url"), {
+mongoose.connect(process.env.MONGO_URL || config.get("db.url"), {
   useNewUrlParser: true,
   useFindAndModify: false,
   useUnifiedTopology: true,
