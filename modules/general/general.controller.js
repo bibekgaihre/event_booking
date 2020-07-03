@@ -4,8 +4,8 @@ const fs = require("fs");
 class Controller {
   async updateImage(payload) {
     let imaged = await GeneralModel.findOne({}, { image: 1 });
-    if (imaged !== null) {
-      fs.unlinkSync(__dirname + "/../../" + imaged.image);
+    if (imaged !== null && imaged.image!==undefined) {
+      fs.unlinkSync("public"+ imaged.image);
     }
     let data = await GeneralModel.findOneAndUpdate(
       {},

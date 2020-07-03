@@ -2,6 +2,7 @@ const router = require("express").Router();
 const SecureUI = require("../../utils/secureUI");
 const adminModel = require("./admin.model");
 const config = require("config");
+const generalModel = require("../general/general.model");
 
 router.get("/", function (req, res, next) {
   res.redirect("/admin/login");
@@ -22,8 +23,9 @@ router.get("/changepassword", SecureUI(), async (req, res, next) => {
   res.render("admin/changepassword");
 });
 
-router.get("/content/update", SecureUI(), function (req, res, next) {
-  res.render("admin/editcms");
+router.get("/content/update", SecureUI(), async function (req, res, next) {
+  let detail = await generalModel.findOne({})
+  res.render("admin/editcms",{text : detail.overlay_text,image : detail.image});
 });
 router.get("/event/update", SecureUI(), function (req, res, next) {
   res.render("admin/editevent");

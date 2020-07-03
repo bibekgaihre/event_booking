@@ -200,6 +200,7 @@
               class="input100"
               type="text"
               name="overlay_text"
+              value="<%=locals.text%>"
               id="overlay_text"
               placeholder="Enter Overlay Text"
             />
@@ -214,6 +215,18 @@
           </div>
           <br />
           <br />
+
+          <%
+          if(locals.image && locals.image!=="" && locals.image!==null && locals.image!==undefined){
+            %>
+            <strong>Current Image : </strong>
+            <img class="img-fluid" src="/<%=locals.image%>"  />
+            <br>
+            <br>
+            <%
+          }
+          %>
+
           <form
             method="POST"
             action=""
