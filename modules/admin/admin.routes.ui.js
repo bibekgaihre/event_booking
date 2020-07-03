@@ -24,13 +24,20 @@ router.get("/changepassword", SecureUI(), async (req, res, next) => {
 });
 
 router.get("/content/update", SecureUI(), async function (req, res, next) {
-  let detail = await generalModel.findOne({})
-  let otext,img
-  if(detail!==null){
-     otext = detail.overlay_text
-     img = detail.img
+  let detail = await generalModel.findOne({});
+  let otext, img, appstore_link, playstore_link;
+  if (detail !== null) {
+    otext = detail.overlay_text;
+    img = detail.img;
+    appstore_link = detail.app_store_link;
+    playstore_link = detail.play_store_link;
   }
-  res.render("admin/editcms",{text : otext,image : img });
+  res.render("admin/editcms", {
+    text: otext,
+    image: img,
+    appstore: appstore_link,
+    playstore: playstore_link,
+  });
 });
 router.get("/event/update", SecureUI(), function (req, res, next) {
   res.render("admin/editevent");

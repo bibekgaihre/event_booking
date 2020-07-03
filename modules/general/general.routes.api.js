@@ -71,5 +71,15 @@ router.post("/changetext", SecureAPI(), async (req, res, next) => {
     console.log(e);
   }
 });
+router.post("/changelink", SecureAPI(), async (req, res, next) => {
+  try {
+    let data = await Controller.updateLink(req.body);
+    if (data) {
+      res.json(data);
+    }
+  } catch (e) {
+    console.log(e);
+  }
+});
 
 module.exports = router;

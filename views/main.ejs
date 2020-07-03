@@ -231,6 +231,8 @@
         }).done((d) => {
           $("#headingtext").text(d.text);
           $("#headerimg").attr("src", d.image);
+          $("#linkapple").attr("href", d.appstore_link);
+          $("#linkgoogle").attr("href", d.playstore_link);
         });
 
         $.ajax({

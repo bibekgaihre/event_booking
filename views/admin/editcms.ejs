@@ -143,6 +143,7 @@
         padding-left: 220px;
       }
     </style>
+
     <!--===============================================================================================-->
   </head>
 
@@ -215,17 +216,54 @@
           </div>
           <br />
           <br />
+          <div
+            class="wrap-input100 validate-input bg1"
+            data-validate="Please Type the Overlay text"
+          >
+            <span class="label-input100">App store Link *</span>
+            <input
+              class="input100"
+              type="text"
+              name="appstore_link"
+              id="appstore_link"
+              value="<%=locals.appstore%>"
+              placeholder="Enter App Store Link"
+            />
+          </div>
+          <br />
+          <div
+            class="wrap-input100 validate-input bg1"
+            data-validate="Please Type the Overlay text"
+          >
+            <span class="label-input100">Play store Link *</span>
+            <input
+              class="input100"
+              type="text"
+              name="playstore_link"
+              id="playstore_link"
+              value="<%=locals.playstore%>"
+              placeholder="Enter Play Store Link"
+            />
+            <!-- value="<%=locals.appstore_link%>" -->
+          </div>
+          <div class="container-contact100-form-btn">
+            <button class="btn contact100-form-btn" type="button" id="btnlink">
+              <span>
+                Update Links
+                <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+              </span>
+            </button>
+          </div>
+          <br />
+          <br />
 
-          <%
-          if(locals.image && locals.image!=="" && locals.image!==null && locals.image!==undefined){
-            %>
-            <strong>Current Image : </strong>
-            <img class="img-fluid" src="/<%=locals.image%>"  />
-            <br>
-            <br>
-            <%
-          }
-          %>
+          <% if(locals.image && locals.image!=="" && locals.image!==null &&
+          locals.image!==undefined){ %>
+          <strong>Current Image : </strong>
+          <img class="img-fluid" src="/<%=locals.image%>" />
+          <br />
+          <br />
+          <% } %>
 
           <form
             method="POST"
@@ -301,6 +339,42 @@
             .then((d) => {
               swal({
                 title: `Heading text is changed.`,
+                buttons: false,
+                timer: 3000,
+              }).then(() => {
+                location.replace("/admin/content/update");
+              });
+            })
+            .fail((e) => {
+              swal({
+                title: `${e.responseJSON.message}`,
+              });
+            });
+        });
+        $("#btnlink").click(function () {
+          if (
+            $("#appstore_link").val() === "" ||
+            $("#playstore_link").val() === ""
+          ) {
+            swal("Links are empty.");
+            return false;
+          }
+          let appstore_link = $("#appstore_link").val();
+          let playstore_link = $("#playstore_link").val();
+
+          let data = {
+            appstore_link,
+            playstore_link,
+          };
+          $.ajax({
+            method: "POST",
+            url: "/api/v1/general/changelink",
+            headers: { Authorization: "Bearer " + Cookies.get("token") },
+            data,
+          })
+            .then((d) => {
+              swal({
+                title: `Links are changed.`,
                 buttons: false,
                 timer: 3000,
               }).then(() => {

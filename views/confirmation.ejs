@@ -105,6 +105,7 @@
       integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
       crossorigin="anonymous"
     ></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.js"></script>
 
     <script
@@ -120,6 +121,15 @@
     <script>
       $("#date").text(moment(new Date(date)).format("LL"));
       $("#time").text(d);
+      $("document").ready(function () {
+        $.ajax({
+          method: "GET",
+          url: "/api/v1/general/",
+        }).done((d) => {
+          $("#linkapple").attr("href", d.appstore_link);
+          $("#linkgoogle").attr("href", d.playstore_link);
+        });
+      });
     </script>
   </body>
 </html>
