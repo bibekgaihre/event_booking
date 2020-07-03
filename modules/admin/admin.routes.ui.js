@@ -25,7 +25,11 @@ router.get("/changepassword", SecureUI(), async (req, res, next) => {
 
 router.get("/content/update", SecureUI(), async function (req, res, next) {
   let detail = await generalModel.findOne({})
-  res.render("admin/editcms",{text : detail.overlay_text,image : detail.image});
+  if(detail!==null){
+    let otext = detail.overlay_text
+    let img = detail.img
+  }
+  res.render("admin/editcms",{text : otext,image : img });
 });
 router.get("/event/update", SecureUI(), function (req, res, next) {
   res.render("admin/editevent");
