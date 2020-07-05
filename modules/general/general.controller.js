@@ -5,7 +5,7 @@ class Controller {
   async updateImage(payload) {
     let imaged = await GeneralModel.findOne({}, { image: 1 });
     if (imaged !== null && imaged.image !== undefined) {
-      fs.unlinkSync("public" + imaged.image);
+      fs.unlinkSync(imaged.image);
     }
     let data = await GeneralModel.findOneAndUpdate(
       {},
