@@ -18,7 +18,6 @@ class Controller {
     let data = await GeneralModel.find();
     // console.log(data);
     let mapped = data.map((d) => {
-      console.log(d);
       return {
         image: d.image,
         text: d.overlay_text,

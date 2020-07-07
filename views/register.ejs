@@ -19,9 +19,9 @@
     <title>Pulze</title>
   </head>
   <body>
-    <nav class="navbar navbar-light bg-light">
+    <nav class="navbar navbar-light">
       <a class="navbar-brand" href="/">
-        <img width="30" height="30" alt="" />
+        <img src="/images/icons/logo.jpeg" width="100px" height="auto" />
       </a>
     </nav>
     <div class="container-fluid lay">
@@ -71,7 +71,7 @@
                 </div>
                 <div class="row">
                   <div class="col-md-12 order-md-1 pr-md-5">
-                    <span>
+                    <span id="sponsoredhead">
                       <h6 style="font-family: Visby CF Medium;">
                         <strong><u>Sponsored by</u></strong>
                       </h6>
@@ -88,13 +88,11 @@
                   <div class="col-md-10 order-md-1 pr-md-1">
                     <div class="col-md-12 order-md-1 pr-md-5">
                       <span id="sponsor_name">
-                        <b>Lim Fried Chicken</b>
+                        <b></b>
                       </span>
                     </div>
                     <div class="col-md-12 order-md-1 pr-md-5">
-                      <span id="sponsor_address">
-                        12 Tanjong Pagar Road, 048442
-                      </span>
+                      <span id="sponsor_address"> </span>
                     </div>
                   </div>
                 </div>
@@ -109,7 +107,8 @@
                     <div class="col-md-12 order-md-1 pr-md-5">
                       <span>
                         <h5>
-                          Are you working at <b>Tan Tock Seng Hospital?</b>
+                          Are you working at
+                          <b id="locationq"></b>?
                         </h5>
                       </span>
                     </div>
@@ -311,9 +310,19 @@
           url: "/api/v1/event/" + eventid,
         }).done((d) => {
           $("#location").text(d.location);
+          $("#locationq").text(d.location);
           $("#date").text(moment(new Date(d.date)).format("LL"));
           $("#event_detail").text(d.event_detail);
-          $("#sponsor_logo").attr("src", "/" + d.sponsor_logo);
+          if (d.sponsor_logo) {
+            $("#sponsor_logo").attr("src", "/" + d.sponsor_logo);
+          }
+          if (
+            !d.sponsor_logo &&
+            d.sponsor_name === "" &&
+            d.sponsor_address === ""
+          ) {
+            $("#sponsoredhead").hide();
+          }
           $("#sponsor_name").text(d.sponsor_name);
           $("#sponsor_address").text(d.sponsor_address);
           $.each(d.meal_option, function (i, val) {
@@ -409,7 +418,17 @@
             data,
           })
             .done(function (data) {
-              location.replace("/confirm/" + eventid + "/" + data.booking._id);
+              if (data.booking) {
+                location.replace(
+                  "/confirm/" + eventid + "/" + data.booking._id
+                );
+              }
+              if (!data.booking) {
+                swal({
+                  title: data.message,
+                });
+                $("#btnbook").prop("disabled", false);
+              }
             })
             .fail(function (err) {
               $("#msg").html(err.responseJSON.message);

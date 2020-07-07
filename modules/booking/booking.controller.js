@@ -1,6 +1,7 @@
 const BookingModel = require("../booking/booking.model");
 const EventModel = require("../event/event.model");
 const mailer = require("../../utils/mailer");
+const moment = require("moment");
 
 class Controller {
   constructor() {}
@@ -27,7 +28,10 @@ class Controller {
         let token = this.generateToken(128);
         payload.token = token;
 
-        let query = { time: event.date.getTime(), location: event.location };
+        let query = {
+          time: new Date(event.date).getTime(),
+          location: event.location,
+        };
         let booking = await BookingModel.findOneAndUpdate(
           { work_email: payload.work_email },
           payload,
@@ -54,13 +58,15 @@ class Controller {
       { is_confirmed: true }
     );
 
+    //
     let time = new Date(+query.time);
+    time = moment(time).format("MM-DD-YYYY hh:mm a");
+    time = time.toString();
     if (data) {
       await EventModel.findOneAndUpdate(
-        { location: query.location, date: time },
+        { location: { $regex: `.*${query.location}.*` }, date: time },
         { $push: { booking: data._id } }
       );
-
       let f = await BookingModel.findOneAndUpdate(
         { token: token },
         { token: null }

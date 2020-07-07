@@ -1,5 +1,6 @@
 const EventModel = require("./event.model");
 const { convertJSONToCSV } = require("../../utils/json2csv");
+const moment = require("moment");
 
 class Controller {
   constructor() {}
@@ -62,19 +63,41 @@ class Controller {
     );
   }
   async getlatestevent() {
-    //only list event which are coming near , o past events maximum 6 events
-    let data = await EventModel.find({ date: { $gte: new Date() } })
-      .limit(6)
-      .sort({ date: +1 });
+    let data = await EventModel.find({});
+    let displaydate = [];
 
-    data.forEach((d, i) => {
+    data.forEach((d) => {
+      if (moment(new Date(d.date)).format("") > moment(new Date()).format("")) {
+        displaydate.push(d);
+      }
+    });
+
+    displaydate.sort(function (a, b) {
+      var dateA = new Date(a.date),
+        dateB = new Date(b.date);
+      return dateA - dateB;
+    });
+    let displaydata = [];
+    displaydate.forEach((d, i) => {
+      if (i < 6) {
+        displaydata.push(d);
+      }
+    });
+    displaydata.sort(function (a, b) {
+      var dateA = new Date(a.date),
+        dateB = new Date(b.date);
+      return dateA - dateB;
+    });
+    console.log(displaydata);
+
+    displaydata.forEach((d, i) => {
       if (d.booking.length === d.max_booking) {
         d.result = 1;
       } else if (d.booking.length < d.max_booking) {
         d.result = 0;
       }
     });
-    return data;
+    return displaydata;
   }
   //edit event but cannot be edited on event date (eventData !== Date.now())
 
@@ -162,4 +185,5 @@ class Controller {
     }
   }
 }
+
 module.exports = new Controller();

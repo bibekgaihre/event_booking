@@ -13,8 +13,8 @@
     "duration_long": 604800000
   },
   "mail": {
-    "username": "your email",
-    "password": "your password",
+    "username": "",
+    "password": "",
     "token": "if auth token used only"
   }
 }

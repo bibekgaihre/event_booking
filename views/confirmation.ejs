@@ -17,18 +17,14 @@
     <script>
       let fullname = "<%= full_name %>";
       let date = "<%= date %>";
-      let e = new Date(date);
-      e = e.toLocaleString("en-US", { hour: "numeric", hour12: true });
-      e = e.slice(-2);
 
-      let d =
-        new Date(date).getHours() + ":" + new Date(date).getMinutes() + " " + e;
+      let e = date.slice(-8);
     </script>
   </head>
   <body>
-    <nav class="navbar navbar-light bg-light">
+    <nav class="navbar navbar-light">
       <a class="navbar-brand" href="/">
-        <img width="30" height="30" alt="" />
+        <img src="/images/icons/logo.jpeg" width="100px" height="auto" />
       </a>
     </nav>
     <div class="container-fluid lay">
@@ -37,11 +33,11 @@
           <div class="row">
             <div class="col-md-12 order-md-1 text-center pr-md-5">
               <div class="confirmelem" style="margin-top: 4%;">
-                <h3>
+                <h2>
                   <b>
                     Thank you <%= full_name %> Your booking has been placed!
                   </b>
-                </h3>
+                </h2>
               </div>
             </div>
           </div>
@@ -51,12 +47,12 @@
                 class="confirmelem"
                 style="color: #1a9cf3; padding-left: 10%; padding-right: 10%;"
               >
-                <h3>
+                <h2>
                   <b>
                     Please check your work email and click the link to verify
                     your email address and confirm your booking.
                   </b>
-                </h3>
+                </h2>
               </div>
             </div>
           </div>
@@ -64,11 +60,11 @@
           <div class="row">
             <div class="col-md-12 order-md-1 text-center pr-md-5">
               <div class="confirmelem2">
-                <h4>
+                <h3>
                   Please note, your free meal will be delivered on
                   <b id="date"></b> at <b id="time"></b>. Please be ready to
                   pickup your meal from the front entrance.
-                </h4>
+                </h3>
               </div>
             </div>
           </div>
@@ -120,7 +116,7 @@
     ></script>
     <script>
       $("#date").text(moment(new Date(date)).format("LL"));
-      $("#time").text(d);
+      $("#time").text(e);
       $("document").ready(function () {
         $.ajax({
           method: "GET",

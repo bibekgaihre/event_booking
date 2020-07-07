@@ -41,6 +41,7 @@ class Mailer {
           "<h2>Verify Your Event Booking</h2>" +
           "</a>", // html body
       });
+
       if (info.messageId) {
         return Promise.resolve({
           message: "Verification Email sent. Please check your inbox",
