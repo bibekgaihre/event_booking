@@ -2,8 +2,8 @@
 const { createAdmin } = require("../modules/admin/admin.controller");
 const mongoose = require("mongoose");
 const config = require("config");
-
-mongoose.connect(process.env.MONGO_URL, {
+let mongo = require("./local.json")
+mongoose.connect(process.env.MONGO_URL || mongo.db.url, {
   useNewUrlParser: true,
   useFindAndModify: false,
   useUnifiedTopology: true,
