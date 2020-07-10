@@ -11,7 +11,7 @@ var indexRouter = require("./routes/index");
 var app = express();
 require('dotenv').config()
 
-mongoose.connect(process.env.MONGO_URL || config.get("db.url"), {
+mongoose.connect(process.env.MONGO_URL, {
   useNewUrlParser: true,
   useFindAndModify: false,
   useUnifiedTopology: true,
