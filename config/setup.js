@@ -3,7 +3,7 @@ const { createAdmin } = require("../modules/admin/admin.controller");
 const mongoose = require("mongoose");
 const config = require("config");
 
-mongoose.connect(process.env.MONGO_URL || config.get("db.url"), {
+mongoose.connect(process.env.MONGO_URL, {
   useNewUrlParser: true,
   useFindAndModify: false,
   useUnifiedTopology: true,
