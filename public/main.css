@@ -90,6 +90,10 @@ body {
   color: #1c9cf3;
   margin-left: 1%;
 }
+.whynot {
+  padding-left: 19%;
+  padding-right: 19%;
+}
 
 .confirmelem2 {
   font-family: "Visby CF Medium";
@@ -194,6 +198,32 @@ body {
 
 @media screen and (max-width: 600px) {
   div.firstp {
-    padding-right: 1%;
+    padding-right: 0%;
+  }
+  div.secondhead {
+    text-align: center;
+  }
+  div.aboutp {
+    padding-left: 27%;
+  }
+  div.thankyouhead {
+  }
+  div.confirmelem2 {
+    padding-left: 0%;
+    padding-right: 0%;
+  }
+  div.whynot {
+    padding-left: 0%;
+    padding-right: 0%;
+  }
+  div.mobileviewicon {
+    /* margin-right: 15px;
+    margin-left: 15px; */
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .mobile-break {
+    display: none;
   }
 }

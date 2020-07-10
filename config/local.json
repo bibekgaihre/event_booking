@@ -13,8 +13,8 @@
     "duration_long": 604800000
   },
   "mail": {
-    "username": "",
-    "password": "",
+    "username": "mailer@onpulze.com",
+    "password": "f@n(yD0ct0rs123",
     "token": "if auth token used only"
   }
 }

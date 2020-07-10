@@ -6,6 +6,8 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0  shrink-to-fit=no"
     />
+    <link rel="icon" type="image/png" href="/images/icons/favicon.ico" />
+
     <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -89,7 +91,7 @@
           <br />
           <div class="row">
             <div class="col-md-12 order-md-1 pr-md-5">
-              <div class="firstp">
+              <div class="firstp secondhead">
                 <b>Our Giveaway Schedule:</b>
               </div>
             </div>
@@ -100,7 +102,7 @@
 
           <div class="row">
             <div class="col-md-12 order-md-1 pr-md-5">
-              <div class="firstp">
+              <div class="firstp secondhead">
                 <b><u>About the #ThankYouFrontLiners giveaway</u></b>
               </div>
             </div>
@@ -133,7 +135,7 @@
           </div>
           <div class="row">
             <div class="col-md-12 order-md-1 pr-md-5">
-              <div class="firstp">
+              <div class="firstp secondhead">
                 <b><u>Help Sponsor the Giveaway</u></b>
               </div>
             </div>
@@ -163,9 +165,11 @@
               </div>
             </div>
           </div>
+          <br />
+          <br />
           <div class="row">
             <div class="col-md-12 order-md-1 pr-md-5">
-              <div class="firstp">
+              <div class="firstp secondhead aboutp">
                 <b><u>About Pulze</u></b>
               </div>
             </div>
@@ -237,7 +241,6 @@
         }).done((d) => {
           $.each(d, function (i, val) {
             let e = val.date.slice(-8);
-            console.log(e);
             if (val.result === 1) {
               $(".maingrid").append(
                 ` <div class="cards">

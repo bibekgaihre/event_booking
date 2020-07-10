@@ -6,6 +6,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0  shrink-to-fit=no"
     />
+    <link rel="icon" type="image/png" href="/images/icons/favicon.ico" />
     <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -34,8 +35,9 @@
             <div class="col-md-12 order-md-1 text-center pr-md-5">
               <div class="confirmelem" style="margin-top: 4%;">
                 <h2>
-                  <b>
-                    Thank you <%= full_name %> Your booking has been placed!
+                  <b class="thankyouhead">
+                    Thank you <br class="mobile-break" /><%= full_name %><br />
+                    Your booking has been placed!
                   </b>
                 </h2>
               </div>
@@ -72,10 +74,7 @@
           <br /><br />
           <div class="row">
             <div class="col-md-12 order-md-1 text-center pr-md-5">
-              <div
-                class="confirmelem"
-                style="padding-left: 19%; padding-right: 19%;"
-              >
+              <div class="confirmelem whynot">
                 <h4>
                   <b>Why not take this opportunity to download Pulze?</b><br />
                   Pulze is completely free to use and will let you connect to
