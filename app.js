@@ -9,6 +9,7 @@ const config = require("config");
 
 var indexRouter = require("./routes/index");
 var app = express();
+require('dotenv').config()
 
 mongoose.connect(process.env.MONGO_URL || config.get("db.url"), {
   useNewUrlParser: true,
